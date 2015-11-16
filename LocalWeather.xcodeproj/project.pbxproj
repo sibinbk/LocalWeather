@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C320B82E1BF95C1400575276 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B82D1BF95C1400575276 /* AppDelegate.swift */; };
-		C320B8301BF95C1400575276 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B82F1BF95C1400575276 /* ViewController.swift */; };
 		C320B8331BF95C1400575276 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C320B8311BF95C1400575276 /* Main.storyboard */; };
 		C320B8361BF95C1400575276 /* LocalWeather.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C320B8341BF95C1400575276 /* LocalWeather.xcdatamodeld */; };
 		C320B8381BF95C1400575276 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C320B8371BF95C1400575276 /* Assets.xcassets */; };
 		C320B83B1BF95C1400575276 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C320B8391BF95C1400575276 /* LaunchScreen.storyboard */; };
 		C320B8461BF95C1400575276 /* LocalWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8451BF95C1400575276 /* LocalWeatherTests.swift */; };
 		C320B8511BF95C1400575276 /* LocalWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8501BF95C1400575276 /* LocalWeatherUITests.swift */; };
+		C320B85F1BF95CDC00575276 /* LWSuburbListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +37,6 @@
 /* Begin PBXFileReference section */
 		C320B82A1BF95C1400575276 /* LocalWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C320B82D1BF95C1400575276 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C320B82F1BF95C1400575276 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C320B8321BF95C1400575276 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C320B8351BF95C1400575276 /* LocalWeather.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LocalWeather.xcdatamodel; sourceTree = "<group>"; };
 		C320B8371BF95C1400575276 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +48,7 @@
 		C320B84C1BF95C1400575276 /* LocalWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C320B8501BF95C1400575276 /* LocalWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeatherUITests.swift; sourceTree = "<group>"; };
 		C320B8521BF95C1400575276 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LWSuburbListController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				C320B82D1BF95C1400575276 /* AppDelegate.swift */,
-				C320B82F1BF95C1400575276 /* ViewController.swift */,
+				C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */,
 				C320B8311BF95C1400575276 /* Main.storyboard */,
 				C320B8371BF95C1400575276 /* Assets.xcassets */,
 				C320B8391BF95C1400575276 /* LaunchScreen.storyboard */,
@@ -259,8 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C320B8301BF95C1400575276 /* ViewController.swift in Sources */,
 				C320B8361BF95C1400575276 /* LocalWeather.xcdatamodeld in Sources */,
+				C320B85F1BF95CDC00575276 /* LWSuburbListController.swift in Sources */,
 				C320B82E1BF95C1400575276 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +352,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -390,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -486,6 +486,7 @@
 				C320B8571BF95C1400575276 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C320B8581BF95C1400575276 /* Build configuration list for PBXNativeTarget "LocalWeatherTests" */ = {
 			isa = XCConfigurationList;
@@ -494,6 +495,7 @@
 				C320B85A1BF95C1400575276 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C320B85B1BF95C1400575276 /* Build configuration list for PBXNativeTarget "LocalWeatherUITests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +504,7 @@
 				C320B85D1BF95C1400575276 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
