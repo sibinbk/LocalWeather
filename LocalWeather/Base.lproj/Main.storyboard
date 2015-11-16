@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0dp-Vh-PTw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="txK-t3-PjV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
@@ -15,7 +15,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SuburbCell" textLabel="xAh-Vt-Yzu" detailTextLabel="U2o-aM-wcc" style="IBUITableViewCellStyleSubtitle" id="NOA-Oe-iCZ">
-                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NOA-Oe-iCZ" id="1gV-Xc-3Nq">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
@@ -48,8 +48,34 @@
                             <outlet property="delegate" destination="0dp-Vh-PTw" id="pfz-S2-n9o"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="5rL-k6-esV">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="fOy-L6-hOZ">
+                            <connections>
+                                <action selector="reloadWeatherData:" destination="0dp-Vh-PTw" id="8ZG-tH-mvu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjn-pr-EW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1079" y="401"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3zW-kl-VMB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="txK-t3-PjV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="wUG-On-jKb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0dp-Vh-PTw" kind="relationship" relationship="rootViewController" id="gHx-0V-dK0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dg9-jU-Zlp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="267" y="401"/>
         </scene>
