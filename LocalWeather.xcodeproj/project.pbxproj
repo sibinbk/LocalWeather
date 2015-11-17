@@ -15,6 +15,7 @@
 		C320B8461BF95C1400575276 /* LocalWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8451BF95C1400575276 /* LocalWeatherTests.swift */; };
 		C320B8511BF95C1400575276 /* LocalWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8501BF95C1400575276 /* LocalWeatherUITests.swift */; };
 		C320B85F1BF95CDC00575276 /* LWSuburbListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */; };
+		C320B8611BFB1C5D00575276 /* LWSuburbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8601BFB1C5D00575276 /* LWSuburbCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C320B8501BF95C1400575276 /* LocalWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeatherUITests.swift; sourceTree = "<group>"; };
 		C320B8521BF95C1400575276 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LWSuburbListController.swift; sourceTree = "<group>"; };
+		C320B8601BFB1C5D00575276 /* LWSuburbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LWSuburbCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				C320B82D1BF95C1400575276 /* AppDelegate.swift */,
 				C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */,
+				C320B8601BFB1C5D00575276 /* LWSuburbCell.swift */,
 				C320B8311BF95C1400575276 /* Main.storyboard */,
 				C320B8371BF95C1400575276 /* Assets.xcassets */,
 				C320B8391BF95C1400575276 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 				C320B8361BF95C1400575276 /* LocalWeather.xcdatamodeld in Sources */,
 				C320B85F1BF95CDC00575276 /* LWSuburbListController.swift in Sources */,
 				C320B82E1BF95C1400575276 /* AppDelegate.swift in Sources */,
+				C320B8611BFB1C5D00575276 /* LWSuburbCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

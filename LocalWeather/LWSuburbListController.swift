@@ -38,7 +38,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.getWeatherData()
+    getWeatherData()
   }
   
   @IBAction func reloadWeatherData(sender: UIBarButtonItem) {
@@ -80,6 +80,10 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
             if let countryName = country["_name"] as? String {
               newItem.setValue(countryName, forKey: "country")
             }
+          }
+          
+          if let temperature = dataItem["_weatherTemp"] as? String {
+            newItem.setValue(temperature, forKey: "temperature")
           }
           
           if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
@@ -165,17 +169,24 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierCell, forIndexPath: indexPath)
+    let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierCell, forIndexPath: indexPath) as! LWSuburbCell
     
+    // Configure Table View Cell
+    configureCell(cell, atIndexPath: indexPath)
+    
+    return cell
+  }
+  
+  func configureCell(cell: LWSuburbCell, atIndexPath indexPath: NSIndexPath) {
+    // Fetch Venue data
     let venueInfo = fetchedResultsController.objectAtIndexPath(indexPath)
     
     if let venueName = venueInfo.valueForKey("venueName") as? String {
-      cell.textLabel?.text = venueName
+      if let country = venueInfo.valueForKey("country") as? String {
+        cell.venueLabel.text = venueName
+        cell.countryLabel.text = country
+      }
     }
-    
-//    if let country = venueInfo.valueForKey("country") as? String {
-//      cell.detailTextLabel?.text = country
-//    }
     
     if let updateTime = venueInfo.valueForKey("updateTime") as? Double {
       if updateTime > 0 {
@@ -185,15 +196,19 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateString = dateFormatter.stringFromDate(updateDate)
         
-        cell.detailTextLabel?.text = dateString
+        cell.updateTimeLabel.text = dateString
       } else {
-        cell.detailTextLabel?.text = "Weather data not available"
+        cell.updateTimeLabel.text = "Weather data not available"
       }
     }
     
-    return cell
+    if let temperature = venueInfo.valueForKey("temperature") as? String {
+      cell.temperatureLabel.text = ("\(temperature) C")
+    } else {
+      cell.temperatureLabel.text = "NA"
+    }
   }
-  
+
   // MARK:- Fetched Results Controller Delegate Methods
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
     tableView.beginUpdates()
