@@ -87,9 +87,8 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
           }
           
           if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
-            newItem.updateTime = updateTime
+            newItem.updateTime = NSDate(timeIntervalSince1970: updateTime)
           }
-          
         }
         
         do {
@@ -189,19 +188,8 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
       cell.countryLabel.text = country
     }
     
-    if let updateTime = venue.updateTime?.doubleValue {
-      if updateTime > 0 {
-        let updateDate = NSDate(timeIntervalSince1970: updateTime)
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let dateString = dateFormatter.stringFromDate(updateDate)
-        
-        cell.updateTimeLabel.text = dateString
-      } else {
-        cell.updateTimeLabel.text = "Weather data not available"
-      }
-    }
+    // Formatted update time string.
+    cell.updateTimeLabel.text = venue.stringForUpdateTime()
     
     if let temperature = venue.temperature {
       cell.temperatureLabel.text = ("\(temperature) C")

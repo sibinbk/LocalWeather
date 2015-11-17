@@ -16,7 +16,7 @@ extension Venue {
 
     @NSManaged var country: String?
     @NSManaged var temperature: String?
-    @NSManaged var updateTime: NSNumber?
+    @NSManaged var updateTime: NSDate?
     @NSManaged var venueName: String?
 
 }

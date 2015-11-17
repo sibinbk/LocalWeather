@@ -14,14 +14,16 @@ class Venue: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 
-  func stringForDate() -> String {
+  func stringForUpdateTime() -> String {
     
     let dateFormatter = NSDateFormatter()
-    dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
-    if let date = NSDate(timeIntervalSince1970: updateTime) {
+    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    if let date = updateTime {
       return dateFormatter.stringFromDate(date)
     } else {
-      return ""
+      return "NA"
     }
   }
+  
 }
