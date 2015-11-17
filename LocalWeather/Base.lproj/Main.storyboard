@@ -83,6 +83,11 @@
                                 <action selector="reloadWeatherData:" destination="0dp-Vh-PTw" id="8ZG-tH-mvu"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Sort" id="sB3-UE-l1X">
+                            <connections>
+                                <action selector="sortList:" destination="0dp-Vh-PTw" id="HVw-Qx-0V8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjn-pr-EW0" userLabel="First Responder" sceneMemberID="firstResponder"/>

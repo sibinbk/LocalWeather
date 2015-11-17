@@ -48,6 +48,28 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     }
   }
   
+  @IBAction func sortList(sender: AnyObject) {
+    let actionSheet = UIAlertController(title: "Sort List By", message: nil, preferredStyle: .ActionSheet)
+    
+    actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+    }))
+    
+    actionSheet.addAction(UIAlertAction(title: "Update Time", style: .Default, handler: { (action) -> Void in
+      self.reloadList(NSSortDescriptor(key: "updateTime", ascending: false))
+    }))
+    
+    actionSheet.addAction(UIAlertAction(title: "Temperature", style: .Default, handler: { (action) -> Void in
+      self.reloadList(NSSortDescriptor(key: "temperature", ascending: false))
+    }))
+    
+    actionSheet.addAction(UIAlertAction(title: "Venue Name", style: .Default, handler: { (action) -> Void in
+      self.reloadList(NSSortDescriptor(key: "venueName", ascending: true))
+    }))
+    
+    presentViewController(actionSheet, animated: true, completion: nil)
+
+  }
+  
   func getWeatherData() {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
@@ -135,6 +157,18 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     } catch let error as NSError {
       print("Error :\(error)")
     }
+  }
+  
+  // MARK:- Reload for sorting
+  func reloadList(sortDescriptor: NSSortDescriptor? = nil) {
+    fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor!]
+    do {
+      try fetchedResultsController.performFetch()
+    } catch {
+      fatalError("Error while fetching venue list")
+    }
+    
+    tableView.reloadData()
   }
   
   // MARK:- Helper Methods
