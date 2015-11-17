@@ -14,9 +14,10 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   let urlString = "https://dnu5embx6omws.cloudfront.net/venues/weather.json"
   let ReuseIdentifierCell = "SuburbCell"
   
-  var managedObjectContext: NSManagedObjectContext!
-  
   lazy var fetchedResultsController: NSFetchedResultsController = {
+    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = appDelegate.managedObjectContext
+
     // Initialize Fetch Request.
     let fetchRequest = NSFetchRequest(entityName: "Venue")
     
@@ -25,7 +26,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     fetchRequest.sortDescriptors = [sortDescriptor]
     
     // Initialize Fetched Results Controller.
-    let fetchedResultsController = NSFetchedResultsController (fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: nil)
+    let fetchedResultsController = NSFetchedResultsController (fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
     
     // Configure Fetched Results Controller
     fetchedResultsController.delegate = self
@@ -49,7 +50,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   func getWeatherData() {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    self.managedObjectContext = appDelegate.managedObjectContext
+    let context = appDelegate.managedObjectContext
     
     let url = NSURL(string: self.urlString)
     let session = NSURLSession.sharedSession()
@@ -65,30 +66,11 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
         }
 
         // Deleting existing Core Data entries before reloading json data.
-        let request = NSFetchRequest(entityName: "Venue")
-        
-        do {
-          let oldData = try self.managedObjectContext.executeFetchRequest(request)
-          
-          if oldData.count > 0 {
-            for item in oldData {
-              self.managedObjectContext.deleteObject(item as! NSManagedObject)
-            }
-            
-            do {
-              try self.managedObjectContext?.save()
-            } catch {
-              let saveError = error as NSError
-              print("\(saveError), \(saveError.userInfo)")
-            }
-          }
-        } catch {
-          print("error")
-        }
+        self.deleteSavedItems()
         
         // Enumerate contents of the array and save to Core Data
         for dataItem in weatherData {
-          let newItem: NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: self.managedObjectContext)
+          let newItem: NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: context)
           
           if let venueName = dataItem["_name"] as? String {
             newItem.setValue(venueName, forKey: "venueName")
@@ -107,7 +89,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
         }
         
         do {
-          try self.managedObjectContext?.save()
+          try context.save()
         } catch {
           let saveError = error as NSError
           print("\(saveError), \(saveError.userInfo)")
@@ -134,6 +116,22 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     })
     
     dataTask.resume()
+  }
+  
+  // MARK:- Data delete method
+  func deleteSavedItems() {
+    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = appDel.managedObjectContext
+    let coord = appDel.persistentStoreCoordinator
+    
+    let fetchRequest = NSFetchRequest(entityName: "Venue")
+    let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+    
+    do {
+      try coord.executeRequest(deleteRequest, withContext: context)
+    } catch let error as NSError {
+      print("Error :\(error)")
+    }
   }
   
   // MARK:- Helper Methods
