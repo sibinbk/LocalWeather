@@ -70,24 +70,24 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
         
         // Enumerate contents of the array and save to Core Data
         for dataItem in weatherData {
-          let newItem: NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: context)
+          let newItem = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: context) as! Venue
           
           if let venueName = dataItem["_name"] as? String {
-            newItem.setValue(venueName, forKey: "venueName")
+            newItem.venueName = venueName
           }
           
           if let country = dataItem["_country"] as? NSDictionary {
             if let countryName = country["_name"] as? String {
-              newItem.setValue(countryName, forKey: "country")
+              newItem.country = countryName
             }
           }
           
           if let temperature = dataItem["_weatherTemp"] as? String {
-            newItem.setValue(temperature, forKey: "temperature")
+            newItem.temperature = temperature
           }
           
           if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
-            newItem.setValue(updateTime, forKey: "updateTime")
+            newItem.updateTime = updateTime
           }
           
         }
@@ -122,7 +122,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     dataTask.resume()
   }
   
-  // MARK:- Data delete method
+  // MARK:- Core Data batch delete
   func deleteSavedItems() {
     let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDel.managedObjectContext
@@ -179,16 +179,17 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   func configureCell(cell: LWSuburbCell, atIndexPath indexPath: NSIndexPath) {
     // Fetch Venue data
-    let venueInfo = fetchedResultsController.objectAtIndexPath(indexPath)
+    let venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
     
-    if let venueName = venueInfo.valueForKey("venueName") as? String {
-      if let country = venueInfo.valueForKey("country") as? String {
-        cell.venueLabel.text = venueName
-        cell.countryLabel.text = country
-      }
+    if let venueName = venue.venueName {
+      cell.venueLabel.text = venueName
     }
     
-    if let updateTime = venueInfo.valueForKey("updateTime") as? Double {
+    if let country = venue.country {
+      cell.countryLabel.text = country
+    }
+    
+    if let updateTime = venue.updateTime?.doubleValue {
       if updateTime > 0 {
         let updateDate = NSDate(timeIntervalSince1970: updateTime)
         
@@ -202,7 +203,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
       }
     }
     
-    if let temperature = venueInfo.valueForKey("temperature") as? String {
+    if let temperature = venue.temperature {
       cell.temperatureLabel.text = ("\(temperature) C")
     } else {
       cell.temperatureLabel.text = "NA"

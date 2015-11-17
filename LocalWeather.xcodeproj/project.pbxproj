@@ -16,6 +16,8 @@
 		C320B8511BF95C1400575276 /* LocalWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8501BF95C1400575276 /* LocalWeatherUITests.swift */; };
 		C320B85F1BF95CDC00575276 /* LWSuburbListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */; };
 		C320B8611BFB1C5D00575276 /* LWSuburbCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8601BFB1C5D00575276 /* LWSuburbCell.swift */; };
+		C320B8641BFB5D0900575276 /* Venue+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8621BFB5D0900575276 /* Venue+CoreDataProperties.swift */; };
+		C320B8651BFB5D0900575276 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8631BFB5D0900575276 /* Venue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		C320B8521BF95C1400575276 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LWSuburbListController.swift; sourceTree = "<group>"; };
 		C320B8601BFB1C5D00575276 /* LWSuburbCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LWSuburbCell.swift; sourceTree = "<group>"; };
+		C320B8621BFB5D0900575276 /* Venue+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Venue+CoreDataProperties.swift"; path = "Model/Venue+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C320B8631BFB5D0900575276 /* Venue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Venue.swift; path = Model/Venue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,7 @@
 		C320B82C1BF95C1400575276 /* LocalWeather */ = {
 			isa = PBXGroup;
 			children = (
+				C320B8661BFB5D1400575276 /* Model */,
 				C320B82D1BF95C1400575276 /* AppDelegate.swift */,
 				C320B85E1BF95CDC00575276 /* LWSuburbListController.swift */,
 				C320B8601BFB1C5D00575276 /* LWSuburbCell.swift */,
@@ -129,6 +134,15 @@
 				C320B8521BF95C1400575276 /* Info.plist */,
 			);
 			path = LocalWeatherUITests;
+			sourceTree = "<group>";
+		};
+		C320B8661BFB5D1400575276 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C320B8631BFB5D0900575276 /* Venue.swift */,
+				C320B8621BFB5D0900575276 /* Venue+CoreDataProperties.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C320B8361BF95C1400575276 /* LocalWeather.xcdatamodeld in Sources */,
+				C320B8651BFB5D0900575276 /* Venue.swift in Sources */,
+				C320B8641BFB5D0900575276 /* Venue+CoreDataProperties.swift in Sources */,
 				C320B85F1BF95CDC00575276 /* LWSuburbListController.swift in Sources */,
 				C320B82E1BF95C1400575276 /* AppDelegate.swift in Sources */,
 				C320B8611BFB1C5D00575276 /* LWSuburbCell.swift in Sources */,
