@@ -42,6 +42,9 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   @IBAction func reloadWeatherData(sender: UIBarButtonItem) {
     print("Refresh button pressed")
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
+      self.getWeatherData()
+    }
   }
   
   func getWeatherData() {
@@ -60,9 +63,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
           print("No data to load")
           return
         }
-        
-        print(weatherData.count)
-        
+
         // Deleting existing Core Data entries before reloading json data.
         let request = NSFetchRequest(entityName: "Venue")
         
@@ -85,6 +86,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
           print("error")
         }
         
+        // Enumerate contents of the array and save to Core Data
         for dataItem in weatherData {
           let newItem: NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: self.managedObjectContext)
           
@@ -97,6 +99,11 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
               newItem.setValue(countryName, forKey: "country")
             }
           }
+          
+          if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
+            newItem.setValue(updateTime, forKey: "updateTime")
+          }
+          
         }
         
         do {
@@ -168,8 +175,22 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
       cell.textLabel?.text = venueName
     }
     
-    if let country = venueInfo.valueForKey("country") as? String {
-      cell.detailTextLabel?.text = country
+//    if let country = venueInfo.valueForKey("country") as? String {
+//      cell.detailTextLabel?.text = country
+//    }
+    
+    if let updateTime = venueInfo.valueForKey("updateTime") as? Double {
+      if updateTime > 0 {
+        let updateDate = NSDate(timeIntervalSince1970: updateTime)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = dateFormatter.stringFromDate(updateDate)
+        
+        cell.detailTextLabel?.text = dateString
+      } else {
+        cell.detailTextLabel?.text = "Weather data not available"
+      }
     }
     
     return cell
