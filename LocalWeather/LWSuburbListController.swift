@@ -67,7 +67,6 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     }))
     
     presentViewController(actionSheet, animated: true, completion: nil)
-
   }
   
   func getWeatherData() {
@@ -148,15 +147,15 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   // MARK:- Core Data batch delete
   func deleteSavedItems() {
-    let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
-    let context = appDel.managedObjectContext
-    let coord = appDel.persistentStoreCoordinator
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = appDelegate.managedObjectContext
+    let storeCoordinator = appDelegate.persistentStoreCoordinator
     
     let fetchRequest = NSFetchRequest(entityName: "Venue")
     let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
     
     do {
-      try coord.executeRequest(deleteRequest, withContext: context)
+      try storeCoordinator.executeRequest(deleteRequest, withContext: context)
     } catch let error as NSError {
       print("Error :\(error)")
     }
