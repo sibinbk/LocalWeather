@@ -105,7 +105,10 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
           }
           
           if let temperature = dataItem["_weatherTemp"] as? String {
-            newItem.temperature = temperature
+            newItem.temperature = Int(temperature)
+          } else {
+            // To filter out Nil values
+            newItem.temperature = -200
           }
           
           if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
@@ -226,7 +229,11 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     cell.updateTimeLabel.text = venue.stringForUpdateTime()
     
     if let temperature = venue.temperature {
+      if temperature == -200 {
+        cell.temperatureLabel.text = "NA"
+      } else {
       cell.temperatureLabel.text = ("\(temperature) C")
+      }
     } else {
       cell.temperatureLabel.text = "NA"
     }

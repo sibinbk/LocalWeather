@@ -15,7 +15,7 @@ import CoreData
 extension Venue {
 
     @NSManaged var country: String?
-    @NSManaged var temperature: String?
+    @NSManaged var temperature: NSNumber?
     @NSManaged var updateTime: NSDate?
     @NSManaged var venueName: String?
 
