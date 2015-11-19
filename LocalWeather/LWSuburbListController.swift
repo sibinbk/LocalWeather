@@ -16,6 +16,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   
   var searchResults = [Venue]()
   var resultSearchController: UISearchController!
+  var filteredListArray = [String]()
   
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -94,19 +95,20 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Country", style: .Default, handler: { (action) -> Void in
-      if let result = self.filteredList("country") {
-        print(result)
-        
-        self.performSegueWithIdentifier("pickerSegue", sender: result)
+      let filterKey = "country"
+      if let result = self.filteredList(filterKey) {
+        print(result) // Remove this line
+        self.filteredListArray = result
+        self.performSegueWithIdentifier("pickerSegue", sender: filterKey)
       }
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Weather Condition", style: .Default, handler: { (action) -> Void in
-      if let result = self.filteredList("weatherCondition") {
-        print(result)
-        
-        self.performSegueWithIdentifier("pickerSegue", sender: result)
-      }
+      let filterKey = "weatherCondition"
+      if let result = self.filteredList(filterKey) {
+        print(result) // Remove this line
+        self.filteredListArray = result
+        self.performSegueWithIdentifier("pickerSegue", sender: filterKey)      }
     }))
     
     presentViewController(actionSheet, animated: true, completion: nil)
@@ -392,8 +394,23 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   // MARK: - Navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if let destination = segue.destinationViewController as? LWPickerController {
-      destination.filteredListArray = sender as? [String]
+      destination.filterKey = sender as? String
+      destination.filteredListArray = self.filteredListArray
+      destination.pickerDelegate = self
     }
   }
-  
+}
+
+extension LWSuburbListController: LWPickerControlDelegate {
+  func didSelectPickerValueFilterKey(filterKey: String, value: String) {
+    print(value)
+    fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "%K == %@", filterKey, value)
+    do {
+      try fetchedResultsController.performFetch()
+    } catch {
+      fatalError("Error while fetching venue list")
+    }
+    
+    self.tableView.reloadData()
+  }
 }

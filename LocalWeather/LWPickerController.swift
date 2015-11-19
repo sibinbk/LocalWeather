@@ -8,9 +8,16 @@
 
 import UIKit
 
+protocol LWPickerControlDelegate: class {
+  func didSelectPickerValueFilterKey(filterKey: String, value: String)
+}
+
 class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+  var filterKey: String?
   var filteredListArray: [String]?
+  
+  weak var pickerDelegate: LWPickerControlDelegate?
   
   @IBOutlet weak var popUpView: UIView!
   @IBOutlet weak var pickerTableView: UITableView!
@@ -51,6 +58,9 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
   // Mark:- Table view delegate
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     print("Selected Row # \(indexPath.row)")
+    if let pickerDelegate = pickerDelegate {
+      pickerDelegate.didSelectPickerValueFilterKey(filterKey!, value: filteredListArray![indexPath.row])
+    }
     
     dismissViewControllerAnimated(true, completion: nil)
   }
