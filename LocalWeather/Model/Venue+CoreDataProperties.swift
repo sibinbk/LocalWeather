@@ -2,7 +2,7 @@
 //  Venue+CoreDataProperties.swift
 //  LocalWeather
 //
-//  Created by Sibin Baby on 18/11/2015.
+//  Created by Sibin Baby on 19/11/2015.
 //  Copyright © 2015 Sibin Baby. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

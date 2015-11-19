@@ -9,10 +9,13 @@
 import UIKit
 import CoreData
 
-class LWSuburbListController: UITableViewController, NSFetchedResultsControllerDelegate {
+class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
   
   let urlString = "https://dnu5embx6omws.cloudfront.net/venues/weather.json"
   let ReuseIdentifierCell = "SuburbCell"
+  
+  var searchResults = [Venue]()
+  var resultSearchController = UISearchController()
   
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -38,16 +41,23 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    self.resultSearchController = UISearchController(searchResultsController: nil)
+    self.resultSearchController.searchResultsUpdater = self
+    self.resultSearchController.dimsBackgroundDuringPresentation = false
+    self.resultSearchController.searchBar.sizeToFit()
+    
+    self.tableView.tableHeaderView = self.resultSearchController.searchBar
+    
     getWeatherData()
   }
   
   @IBAction func reloadWeatherData(sender: UIBarButtonItem) {
     print("Refresh button pressed")
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-      self.getWeatherData()
-    }
+    
+    self.getWeatherData()
   }
-  
+    
   @IBAction func sortList(sender: AnyObject) {
     let actionSheet = UIAlertController(title: "Sort List By", message: nil, preferredStyle: .ActionSheet)
     
@@ -170,6 +180,31 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     tableView.reloadData()
   }
   
+  // Mark:- Search Results Update method
+  func updateSearchResultsForSearchController(searchController: UISearchController)
+  {
+    self.searchResults.removeAll(keepCapacity: false)
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = appDelegate.managedObjectContext
+    
+    let fetchRequest = NSFetchRequest(entityName: "Venue")
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
+    
+    let searchPredicate = NSPredicate(format: "venueName CONTAINS[c] %@", searchController.searchBar.text!)
+    fetchRequest.predicate = searchPredicate
+    
+    do {
+      if let results = try context.executeFetchRequest(fetchRequest) as? [Venue] {
+        searchResults = results
+      }
+    } catch {
+      fatalError("Error while fetching venue list")
+    }
+    
+    tableView.reloadData()
+  }
+  
   // MARK:- Helper Methods
   private func showAlertWithTitle(title: String, message: String, cancelButtonTitle: String) {
     // Initialize Alert Controller
@@ -184,6 +219,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   // MARK: - Table view data source
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    
     if let sections = fetchedResultsController.sections {
       return sections.count
     }
@@ -192,12 +228,17 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let sections = fetchedResultsController.sections {
-      let sectionInfo = sections[section]
-      return sectionInfo.numberOfObjects
-    }
     
-    return 0
+    if self.resultSearchController.active {
+      return self.searchResults.count
+    } else {
+      if let sections = fetchedResultsController.sections {
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
+      }
+      
+      return 0
+    }
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -210,25 +251,50 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   }
   
   func configureCell(cell: LWSuburbCell, atIndexPath indexPath: NSIndexPath) {
-    // Fetch Venue data
-    let venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
     
-    if let venueName = venue.venueName {
-      cell.venueLabel.text = venueName
-    }
-    
-    if let country = venue.country {
-      cell.countryLabel.text = country
-    }
-    
-    // Formatted update time string.
-    cell.updateTimeLabel.text = venue.stringForUpdateTime()
-    
-    if let temperature = venue.temperature {
-      cell.temperatureLabel.text = ("\(temperature) C")
+    if self.resultSearchController.active {
+      let venue: Venue = self.searchResults[indexPath.row]
+      
+      if let venueName = venue.venueName {
+        cell.venueLabel.text = venueName
+      }
+      
+      if let country = venue.country {
+        cell.countryLabel.text = country
+      }
+      
+      // Formatted update time string.
+      cell.updateTimeLabel.text = venue.stringForUpdateTime()
+      
+      if let temperature = venue.temperature {
+        cell.temperatureLabel.text = ("\(temperature) C")
+      } else {
+        cell.temperatureLabel.text = "NA"
+      }
+
     } else {
-      cell.temperatureLabel.text = "NA"
+      // Fetch Venue data
+      let venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
+      
+      if let venueName = venue.venueName {
+        cell.venueLabel.text = venueName
+      }
+      
+      if let country = venue.country {
+        cell.countryLabel.text = country
+      }
+      
+      // Formatted update time string.
+      cell.updateTimeLabel.text = venue.stringForUpdateTime()
+      
+      if let temperature = venue.temperature {
+        cell.temperatureLabel.text = ("\(temperature) C")
+      } else {
+        cell.temperatureLabel.text = "NA"
+      }
+
     }
+    
   }
 
   // MARK:- Fetched Results Controller Delegate Methods
@@ -265,42 +331,6 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
       break;
     }
   }
-  
-  
-  /*
-  // Override to support conditional editing of the table view.
-  override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-  // Return false if you do not want the specified item to be editable.
-  return true
-  }
-  */
-  
-  /*
-  // Override to support editing the table view.
-  override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-  if editingStyle == .Delete {
-  // Delete the row from the data source
-  tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-  } else if editingStyle == .Insert {
-  // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-  }
-  }
-  */
-  
-  /*
-  // Override to support rearranging the table view.
-  override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-  
-  }
-  */
-  
-  /*
-  // Override to support conditional rearranging of the table view.
-  override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-  // Return false if you do not want the item to be re-orderable.
-  return true
-  }
-  */
   
   /*
   // MARK: - Navigation
