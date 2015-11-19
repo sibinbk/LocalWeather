@@ -97,10 +97,87 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <segue destination="MW8-iY-2Zq" kind="presentation" identifier="pickerSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="5sd-K5-2Cp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjn-pr-EW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1079" y="401"/>
+        </scene>
+        <!--Picker Controller-->
+        <scene sceneID="Laf-q8-Sf3">
+            <objects>
+                <viewController id="MW8-iY-2Zq" customClass="LWPickerController" customModule="LocalWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XnK-MY-N9g"/>
+                        <viewControllerLayoutGuide type="bottom" id="QYP-L3-4rN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lby-9I-ZFv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J72-fq-pBJ">
+                                <rect key="frame" x="150" y="120" width="300" height="360"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ena-r4-L1x">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="360"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PickerCell" textLabel="trS-Cy-8wm" rowHeight="50" style="IBUITableViewCellStyleDefault" id="9eX-FK-zKd">
+                                                <rect key="frame" x="0.0" y="28" width="300" height="50"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9eX-FK-zKd" id="26N-4B-pgp">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="49.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="trS-Cy-8wm">
+                                                            <rect key="frame" x="15" y="0.0" width="270" height="49.5"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <animations/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <animations/>
+                                                </tableViewCellContentView>
+                                                <animations/>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="MW8-iY-2Zq" id="BrX-7v-N8W"/>
+                                            <outlet property="delegate" destination="MW8-iY-2Zq" id="CDd-cS-c7j"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ena-r4-L1x" secondAttribute="trailing" id="3fx-ZZ-NcL"/>
+                                    <constraint firstAttribute="width" constant="300" id="gFi-mP-UQN"/>
+                                    <constraint firstItem="ena-r4-L1x" firstAttribute="leading" secondItem="J72-fq-pBJ" secondAttribute="leading" id="iRZ-JD-YWx"/>
+                                    <constraint firstAttribute="height" constant="360" id="ig9-qI-QKd"/>
+                                    <constraint firstAttribute="bottom" secondItem="ena-r4-L1x" secondAttribute="bottom" id="sKu-RR-RzZ"/>
+                                    <constraint firstItem="ena-r4-L1x" firstAttribute="top" secondItem="J72-fq-pBJ" secondAttribute="top" id="t3S-W8-n7C"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J72-fq-pBJ" firstAttribute="centerX" secondItem="Lby-9I-ZFv" secondAttribute="centerX" id="V6V-gG-209"/>
+                            <constraint firstItem="J72-fq-pBJ" firstAttribute="centerY" secondItem="Lby-9I-ZFv" secondAttribute="centerY" id="aBf-5J-N81"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pickerTableView" destination="ena-r4-L1x" id="UBL-xo-HGE"/>
+                        <outlet property="popUpView" destination="J72-fq-pBJ" id="4dB-Tt-UPO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8LS-vS-2e1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1839" y="401"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="3zW-kl-VMB">
