@@ -18,5 +18,7 @@ extension Venue {
     @NSManaged var temperature: NSNumber?
     @NSManaged var updateTime: NSDate?
     @NSManaged var venueName: String?
+    @NSManaged var weatherCondition: String?
+    @NSManaged var weatherIcon: String?
 
 }

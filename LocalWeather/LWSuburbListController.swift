@@ -87,6 +87,27 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     presentViewController(actionSheet, animated: true, completion: nil)
   }
   
+  @IBAction func filterList(sender: AnyObject) {
+    let actionSheet = UIAlertController(title: "Filter List By", message: nil, preferredStyle: .ActionSheet)
+    
+    actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+    }))
+    
+    actionSheet.addAction(UIAlertAction(title: "Country", style: .Default, handler: { (action) -> Void in
+      if let result = self.filteredListArray("country") {
+        print(result)
+      }
+    }))
+    
+    actionSheet.addAction(UIAlertAction(title: "Weather Condition", style: .Default, handler: { (action) -> Void in
+      if let result = self.filteredListArray("weatherCondition") {
+        print(result)
+      }
+    }))
+    
+    presentViewController(actionSheet, animated: true, completion: nil)
+  }
+  
   func getWeatherData() {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
@@ -119,6 +140,14 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
             if let countryName = country["_name"] as? String {
               newItem.country = countryName
             }
+          }
+          
+          if let weatherCondition = dataItem["_weatherCondition"] as? String {
+            newItem.weatherCondition = weatherCondition
+          }
+          
+          if let weatherIcon = dataItem["_weatherConditionIcon"] as? String {
+            newItem.weatherIcon = weatherIcon
           }
           
           if let temperature = dataItem["_weatherTemp"] as? String {
@@ -211,6 +240,34 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
     
     tableView.reloadData()
+  }
+  
+  // Mark:- Filter method to get distinct values.
+  func filteredListArray(entryItem: String) -> [[String:AnyObject]]? {
+
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = appDelegate.managedObjectContext
+    
+    var expressionDescriptions = [AnyObject]()
+    expressionDescriptions.append(entryItem)
+    
+    let fetchRequest = NSFetchRequest(entityName: "Venue")
+    fetchRequest.propertiesToFetch = [entryItem]
+    fetchRequest.resultType = NSFetchRequestResultType.DictionaryResultType
+    fetchRequest.returnsDistinctResults = true
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: entryItem, ascending: true)]
+    fetchRequest.predicate = NSPredicate(format: "%K != %@", entryItem, "")
+    fetchRequest.propertiesToFetch = expressionDescriptions
+    
+    var filteredList :[[String: AnyObject]]!
+    
+    do {
+      filteredList = try context.executeFetchRequest(fetchRequest) as? [[String:AnyObject]]
+    } catch {
+      filteredList = nil
+    }
+    
+    return filteredList
   }
   
   // MARK:- Helper Methods
