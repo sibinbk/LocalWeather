@@ -143,16 +143,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         // Move contents of the array into Core Data
         self.storeWeatherInfoFromData(weatherData, intoContext: context)
         
-        do {
-          try context.save()
-        } catch {
-          let saveError = error as NSError
-          print("\(saveError), \(saveError.userInfo)")
-          dispatch_async(dispatch_get_main_queue()) {
-            self.showAlertWithTitle("Warning", message: "Weather data could not be saved.", cancelButtonTitle: "OK")
-          }
-          return
-        }
+        // Save data
+        self.saveDataIntoContext(context)
         
         self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
         self.fetchedResultsController.fetchRequest.predicate = nil
@@ -225,6 +217,19 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
       if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
         newItem.updateTime = NSDate(timeIntervalSince1970: updateTime)
       }
+    }
+  }
+  
+  // MARK:- Save data into Core Data
+  func saveDataIntoContext(context: NSManagedObjectContext) {
+    do {
+      try context.save()
+    } catch {
+      let saveError = error as NSError
+      dispatch_async(dispatch_get_main_queue()) {
+        self.showAlertWithTitle("Warning!", message: "Error while saving data! Error : \(saveError), \(saveError.userInfo)", cancelButtonTitle: "OK")
+      }
+      return
     }
   }
   
