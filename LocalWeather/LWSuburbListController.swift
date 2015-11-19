@@ -74,15 +74,15 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Update Time", style: .Default, handler: { (action) -> Void in
-      self.reloadList(NSSortDescriptor(key: "updateTime", ascending: false))
+      self.reloadSortedList(NSSortDescriptor(key: "updateTime", ascending: false))
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Temperature", style: .Default, handler: { (action) -> Void in
-      self.reloadList(NSSortDescriptor(key: "temperature", ascending: false))
+      self.reloadSortedList(NSSortDescriptor(key: "temperature", ascending: false))
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Venue Name", style: .Default, handler: { (action) -> Void in
-      self.reloadList(NSSortDescriptor(key: "venueName", ascending: true))
+      self.reloadSortedList(NSSortDescriptor(key: "venueName", ascending: true))
     }))
     
     presentViewController(actionSheet, animated: true, completion: nil)
@@ -92,6 +92,10 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     let actionSheet = UIAlertController(title: "Filter List By", message: nil, preferredStyle: .ActionSheet)
     
     actionSheet.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action) -> Void in
+    }))
+    
+    actionSheet.addAction(UIAlertAction(title: "Show All", style: .Default, handler: { (action) -> Void in
+      self.reloadFullList()
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Country", style: .Default, handler: { (action) -> Void in
@@ -174,6 +178,9 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
           self.showAlertWithTitle("Warning", message: "Weather data could not be saved.", cancelButtonTitle: "OK")
         }
         
+        self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
+        self.fetchedResultsController.fetchRequest.predicate = nil
+        
         do {
           try self.fetchedResultsController.performFetch()
         } catch {
@@ -212,8 +219,21 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   // MARK:- Reload for sorting
-  func reloadList(sortDescriptor: NSSortDescriptor? = nil) {
+  func reloadSortedList(sortDescriptor: NSSortDescriptor? = nil) {
     fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor!]
+//    fetchedResultsController.fetchRequest.predicate = nil
+    do {
+      try fetchedResultsController.performFetch()
+    } catch {
+      fatalError("Error while fetching venue list")
+    }
+    
+    tableView.reloadData()
+  }
+  
+  // MARK:- Reload All items with sorting if any.
+  func reloadFullList() {
+    fetchedResultsController.fetchRequest.predicate = nil
     do {
       try fetchedResultsController.performFetch()
     } catch {
@@ -402,6 +422,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
 }
 
 extension LWSuburbListController: LWPickerControlDelegate {
+  // Mark:- Picker delegate method
   func didSelectPickerValueFilterKey(filterKey: String, value: String) {
     print(value)
     fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "%K == %@", filterKey, value)
