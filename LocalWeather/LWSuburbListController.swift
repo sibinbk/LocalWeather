@@ -94,13 +94,13 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Country", style: .Default, handler: { (action) -> Void in
-      if let result = self.filteredListArray("country") {
+      if let result = self.filteredList("country") {
         print(result)
       }
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Weather Condition", style: .Default, handler: { (action) -> Void in
-      if let result = self.filteredListArray("weatherCondition") {
+      if let result = self.filteredList("weatherCondition") {
         print(result)
       }
     }))
@@ -243,20 +243,20 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   // Mark:- Filter method to get distinct values.
-  func filteredListArray(entryItem: String) -> [[String:AnyObject]]? {
+  func filteredList(filterItem: String) -> [[String:AnyObject]]? {
 
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
     
     var expressionDescriptions = [AnyObject]()
-    expressionDescriptions.append(entryItem)
+    expressionDescriptions.append(filterItem)
     
     let fetchRequest = NSFetchRequest(entityName: "Venue")
-    fetchRequest.propertiesToFetch = [entryItem]
+    fetchRequest.propertiesToFetch = [filterItem]
     fetchRequest.resultType = NSFetchRequestResultType.DictionaryResultType
     fetchRequest.returnsDistinctResults = true
-    fetchRequest.sortDescriptors = [NSSortDescriptor(key: entryItem, ascending: true)]
-    fetchRequest.predicate = NSPredicate(format: "%K != %@", entryItem, "")
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: filterItem, ascending: true)]
+    fetchRequest.predicate = NSPredicate(format: "%K != %@", filterItem, "")
     fetchRequest.propertiesToFetch = expressionDescriptions
     
     var filteredList :[[String: AnyObject]]!
