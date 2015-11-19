@@ -10,6 +10,8 @@ import UIKit
 
 class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+  var filteredListArray: [String]?
+  
   @IBOutlet weak var popUpView: UIView!
   @IBOutlet weak var pickerTableView: UITableView!
   
@@ -29,14 +31,19 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    if let filteredListArray = filteredListArray {
+      return filteredListArray.count
+    }
+    return 0
   }
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let ReuseIdentifierCell = "PickerCell"
     let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierCell, forIndexPath: indexPath)
     
-    cell.textLabel?.text = "Row # \(indexPath.row)"
+    if let filteredListArray = filteredListArray {
+      cell.textLabel?.text = filteredListArray[indexPath.row] as String
+    }
     
     return cell
   }

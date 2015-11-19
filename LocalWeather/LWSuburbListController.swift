@@ -97,13 +97,15 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
       if let result = self.filteredList("country") {
         print(result)
         
-        self.performSegueWithIdentifier("pickerSegue", sender: nil)
+        self.performSegueWithIdentifier("pickerSegue", sender: result)
       }
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Weather Condition", style: .Default, handler: { (action) -> Void in
       if let result = self.filteredList("weatherCondition") {
         print(result)
+        
+        self.performSegueWithIdentifier("pickerSegue", sender: result)
       }
     }))
     
@@ -245,7 +247,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   // Mark:- Filter method to get distinct values.
-  func filteredList(filterItem: String) -> [[String:AnyObject]]? {
+  func filteredList(filterItem: String) -> [String]? {
 
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
@@ -261,15 +263,21 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     fetchRequest.predicate = NSPredicate(format: "%K != %@", filterItem, "")
     fetchRequest.propertiesToFetch = expressionDescriptions
     
-    var filteredList :[[String: AnyObject]]!
+    var resultArray = [String]()
     
     do {
-      filteredList = try context.executeFetchRequest(fetchRequest) as? [[String:AnyObject]]
+      if let filteredList = try context.executeFetchRequest(fetchRequest) as? [[String: AnyObject]] {
+        for item in filteredList {
+          if let result = item[filterItem] as? String {
+            resultArray.append(result)
+          }
+        }
+      }
     } catch {
-      filteredList = nil
+      print("error")
     }
     
-    return filteredList
+    return resultArray
   }
   
   // MARK:- Helper Methods
@@ -382,9 +390,10 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   // MARK: - Navigation
-  
-//  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//
-//  }
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if let destination = segue.destinationViewController as? LWPickerController {
+      destination.filteredListArray = sender as? [String]
+    }
+  }
   
 }
