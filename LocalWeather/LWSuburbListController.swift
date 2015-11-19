@@ -46,10 +46,11 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     self.resultSearchController.searchResultsUpdater = self
     self.resultSearchController.dimsBackgroundDuringPresentation = false
     self.resultSearchController.searchBar.sizeToFit()
-    
     self.tableView.tableHeaderView = self.resultSearchController.searchBar
     
+    // Load json weather data.
     getWeatherData()
+    
   }
   
   deinit{
@@ -135,7 +136,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
           let saveError = error as NSError
           print("\(saveError), \(saveError.userInfo)")
           
-          self.showAlertWithTitle("Warning", message: "Your to-do could not be saved.", cancelButtonTitle: "OK")
+          self.showAlertWithTitle("Warning", message: "Weather data could not be saved.", cancelButtonTitle: "OK")
         }
         
         do {
