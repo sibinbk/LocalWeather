@@ -95,7 +95,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Show All", style: .Default, handler: { (action) -> Void in
-      self.reloadFullList()
+      self.reloadFullListWithSortedData()
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Country", style: .Default, handler: { (action) -> Void in
@@ -141,7 +141,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         self.deleteSavedItems()
         
         // Move contents of the array into Core Data
-        self.storeWeatherInfoFromData(weatherData, inToContext: context)
+        self.storeWeatherInfoFromData(weatherData, intoContext: context)
         
         do {
           try context.save()
@@ -195,10 +195,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   // Mark:- Enumerate method to store JSON data into Core Data.
-  func storeWeatherInfoFromData(data :NSArray, inToContext context: NSManagedObjectContext) {
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let context = appDelegate.managedObjectContext
-    // Enumerate contents of the array and save to Core Data
+  func storeWeatherInfoFromData(data :NSArray, intoContext context: NSManagedObjectContext) {
+    // Enumerate contents of the array
     for dataItem in data {
       let newItem = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: context) as! Venue
       
@@ -242,8 +240,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     tableView.reloadData()
   }
   
-  // MARK:- Reload All items with sorting if any.
-  func reloadFullList() {
+  // MARK:- Reload All items with sorting.
+  func reloadFullListWithSortedData() {
     fetchedResultsController.fetchRequest.predicate = nil
     do {
       try fetchedResultsController.performFetch()
