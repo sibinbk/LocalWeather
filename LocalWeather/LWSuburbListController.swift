@@ -131,51 +131,27 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         let jsonResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
         
         guard let weatherData = jsonResult["data"] as? NSArray else {
-          print("No data to load")
+          dispatch_async(dispatch_get_main_queue()) {
+            self.showAlertWithTitle("Attention!", message: "No Weather data to load", cancelButtonTitle: "OK")
+          }
           return
         }
 
         // Deleting existing Core Data entries before reloading json data.
         self.deleteSavedItems()
         
-        // Enumerate contents of the array and save to Core Data
-        for dataItem in weatherData {
-          let newItem = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: context) as! Venue
-          
-          if let venueName = dataItem["_name"] as? String {
-            newItem.venueName = venueName
-          }
-          
-          if let country = dataItem["_country"] as? NSDictionary {
-            if let countryName = country["_name"] as? String {
-              newItem.country = countryName
-            }
-          }
-          
-          if let weatherCondition = dataItem["_weatherCondition"] as? String {
-            newItem.weatherCondition = weatherCondition
-          }
-          
-          if let weatherIcon = dataItem["_weatherConditionIcon"] as? String {
-            newItem.weatherIcon = weatherIcon
-          }
-          
-          if let temperature = dataItem["_weatherTemp"] as? String {
-            newItem.temperature = Int(temperature)
-          }
-          
-          if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
-            newItem.updateTime = NSDate(timeIntervalSince1970: updateTime)
-          }
-        }
+        // Move contents of the array into Core Data
+        self.storeWeatherInfoFromData(weatherData, inToContext: context)
         
         do {
           try context.save()
         } catch {
           let saveError = error as NSError
           print("\(saveError), \(saveError.userInfo)")
-          
-          self.showAlertWithTitle("Warning", message: "Weather data could not be saved.", cancelButtonTitle: "OK")
+          dispatch_async(dispatch_get_main_queue()) {
+            self.showAlertWithTitle("Warning", message: "Weather data could not be saved.", cancelButtonTitle: "OK")
+          }
+          return
         }
         
         self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
@@ -218,10 +194,45 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
   }
   
+  // Mark:- Enumerate method to store JSON data into Core Data.
+  func storeWeatherInfoFromData(data :NSArray, inToContext context: NSManagedObjectContext) {
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = appDelegate.managedObjectContext
+    // Enumerate contents of the array and save to Core Data
+    for dataItem in data {
+      let newItem = NSEntityDescription.insertNewObjectForEntityForName("Venue", inManagedObjectContext: context) as! Venue
+      
+      if let venueName = dataItem["_name"] as? String {
+        newItem.venueName = venueName
+      }
+      
+      if let country = dataItem["_country"] as? NSDictionary {
+        if let countryName = country["_name"] as? String {
+          newItem.country = countryName
+        }
+      }
+      
+      if let weatherCondition = dataItem["_weatherCondition"] as? String {
+        newItem.weatherCondition = weatherCondition
+      }
+      
+      if let weatherIcon = dataItem["_weatherConditionIcon"] as? String {
+        newItem.weatherIcon = weatherIcon
+      }
+      
+      if let temperature = dataItem["_weatherTemp"] as? String {
+        newItem.temperature = Int(temperature)
+      }
+      
+      if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
+        newItem.updateTime = NSDate(timeIntervalSince1970: updateTime)
+      }
+    }
+  }
+  
   // MARK:- Reload for sorting
   func reloadSortedList(sortDescriptor: NSSortDescriptor? = nil) {
     fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor!]
-//    fetchedResultsController.fetchRequest.predicate = nil
     do {
       try fetchedResultsController.performFetch()
     } catch {
@@ -308,7 +319,9 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
     
     // Configure Alert Controller
-    alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: nil))
+    alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (action) -> Void in
+//      self.reloadFullList()
+    }))
     
     // Present Alert Controller
     presentViewController(alertController, animated: true, completion: nil)
