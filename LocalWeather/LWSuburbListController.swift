@@ -15,7 +15,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   let ReuseIdentifierCell = "SuburbCell"
   
   var searchResults = [Venue]()
-  var resultSearchController = UISearchController()
+  var resultSearchController: UISearchController!
   
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -50,6 +50,13 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     self.tableView.tableHeaderView = self.resultSearchController.searchBar
     
     getWeatherData()
+  }
+  
+  deinit{
+    if let superView = resultSearchController.view.superview
+    {
+      superView.removeFromSuperview()
+    }
   }
   
   @IBAction func reloadWeatherData(sender: UIBarButtonItem) {
@@ -219,11 +226,13 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   
   // MARK: - Table view data source
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    
-    if let sections = fetchedResultsController.sections {
-      return sections.count
+    if self.resultSearchController.active {
+      return 1
+    } else {
+      if let sections = fetchedResultsController.sections {
+        return sections.count
+      }
     }
-    
     return 0
   }
   
@@ -236,9 +245,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         let sectionInfo = sections[section]
         return sectionInfo.numberOfObjects
       }
-      
-      return 0
     }
+    return 0
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -252,49 +260,30 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   
   func configureCell(cell: LWSuburbCell, atIndexPath indexPath: NSIndexPath) {
     
+    let venueInfo: Venue
+    
     if self.resultSearchController.active {
-      let venue: Venue = self.searchResults[indexPath.row]
-      
-      if let venueName = venue.venueName {
-        cell.venueLabel.text = venueName
-      }
-      
-      if let country = venue.country {
-        cell.countryLabel.text = country
-      }
-      
-      // Formatted update time string.
-      cell.updateTimeLabel.text = venue.stringForUpdateTime()
-      
-      if let temperature = venue.temperature {
-        cell.temperatureLabel.text = ("\(temperature) C")
-      } else {
-        cell.temperatureLabel.text = "NA"
-      }
-
+      venueInfo = self.searchResults[indexPath.row]
     } else {
-      // Fetch Venue data
-      let venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
-      
-      if let venueName = venue.venueName {
-        cell.venueLabel.text = venueName
-      }
-      
-      if let country = venue.country {
-        cell.countryLabel.text = country
-      }
-      
-      // Formatted update time string.
-      cell.updateTimeLabel.text = venue.stringForUpdateTime()
-      
-      if let temperature = venue.temperature {
-        cell.temperatureLabel.text = ("\(temperature) C")
-      } else {
-        cell.temperatureLabel.text = "NA"
-      }
-
+      venueInfo = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
     }
     
+    if let venueName = venueInfo.venueName {
+      cell.venueLabel.text = venueName
+    }
+    
+    if let country = venueInfo.country {
+      cell.countryLabel.text = country
+    }
+    
+    // Formatted update time string.
+    cell.updateTimeLabel.text = venueInfo.stringForUpdateTime()
+    
+    if let temperature = venueInfo.temperature {
+      cell.temperatureLabel.text = ("\(temperature) C")
+    } else {
+      cell.temperatureLabel.text = "NA"
+    }
   }
 
   // MARK:- Fetched Results Controller Delegate Methods
