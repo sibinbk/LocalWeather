@@ -79,7 +79,9 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     if connectedToNetwork() {
       loadWeatherData(urlString)
     } else {
-      print("Check network connection")
+      dispatch_async(dispatch_get_main_queue()) {
+        self.showAlertWithTitle("No Network Connectivity!", message: "Please check your internet connectivity", cancelButtonTitle: "OK")
+      }
     }
   }
   
@@ -97,10 +99,12 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     if connectedToNetwork() {
       loadWeatherData(urlString)
     } else {
-      print("Check network connection")
+      dispatch_async(dispatch_get_main_queue()) {
+        self.showAlertWithTitle("No Network Connectivity!", message: "Please check your internet connectivity", cancelButtonTitle: "OK")
+      }
     }
   }
-    
+  
   @IBAction func sortList(sender: AnyObject) {
     let actionSheet = UIAlertController(title: "Sort List By", message: nil, preferredStyle: .ActionSheet)
     
