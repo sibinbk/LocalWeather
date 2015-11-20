@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SystemConfiguration
 
 class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
   
@@ -38,6 +39,30 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     return fetchedResultsController
   }()
   
+  // MARK: - Check Reachability
+  
+  func connectedToNetwork() -> Bool {
+    
+    var zeroAddress = sockaddr_in()
+    zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+    zeroAddress.sin_family = sa_family_t(AF_INET)
+    
+    guard let defaultRouteReachability = withUnsafePointer(&zeroAddress, {
+      SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+    }) else {
+      return false
+    }
+    
+    var flags : SCNetworkReachabilityFlags = []
+    if !SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) {
+      return false
+    }
+    
+    let isReachable = flags.contains(.Reachable)
+    let needsConnection = flags.contains(.ConnectionRequired)
+    return (isReachable && !needsConnection)
+  }
+
   // MARK: - View Life Cycle
   
   override func viewDidLoad() {
@@ -49,9 +74,13 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     self.resultSearchController.searchBar.sizeToFit()
     self.tableView.tableHeaderView = self.resultSearchController.searchBar
     
-    // Load json weather data.
-    loadWeatherData(urlString)
-    
+    // Check connectivity before network call.
+  
+    if connectedToNetwork() {
+      loadWeatherData(urlString)
+    } else {
+      print("Check network connection")
+    }
   }
   
   deinit{
@@ -64,7 +93,12 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   @IBAction func reloadWeatherData(sender: UIBarButtonItem) {
     print("Refresh button pressed")
     // Reload weather data
-    loadWeatherData(urlString)
+    
+    if connectedToNetwork() {
+      loadWeatherData(urlString)
+    } else {
+      print("Check network connection")
+    }
   }
     
   @IBAction func sortList(sender: AnyObject) {
@@ -158,7 +192,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     dataTask.resume()
   }
   
-  // MARK:- Core Data batch delete
+  // MARK: - Core Data batch delete
+  
   func deleteSavedItems() {
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
@@ -174,7 +209,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
   }
   
-  // Mark:- Enumerate method to store JSON data into Core Data.
+  // Mark: - Enumerate method to store JSON data into Core Data
+  
   func storeWeatherInfoFromData(data :NSArray, intoContext context: NSManagedObjectContext) {
     // Enumerate contents of the array
     for dataItem in data {
@@ -208,7 +244,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
   }
   
-  // MARK:- Save data into Core Data
+  // MARK: - Save data into Core Data
+  
   func saveDataIntoContext(context: NSManagedObjectContext) {
     do {
       try context.save()
@@ -221,7 +258,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
   }
   
-  // MARK:- Fetch all data from store.
+  // MARK: - Fetch all data from store
+  
   func fetchAllDataFromStore() {
     self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
     fetchedResultsController.fetchRequest.predicate = nil
@@ -236,7 +274,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
   }
   
-  // MARK:- Reload for sorting
+  // MARK: - Reload for sorting
+  
   func reloadSortedList(sortDescriptor: NSSortDescriptor? = nil) {
     fetchedResultsController.fetchRequest.sortDescriptors = [sortDescriptor!]
     do {
@@ -248,7 +287,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     tableView.reloadData()
   }
   
-  // MARK:- Reload All items with sorting.
+  // MARK: - Reload All items with sorting
+  
   func reloadFullListWithSortedData() {
     fetchedResultsController.fetchRequest.predicate = nil
     do {
@@ -260,7 +300,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     tableView.reloadData()
   }
   
-  // Mark:- Search Results Update method
+  // MARK: - Search Results Update method
+  
   func updateSearchResultsForSearchController(searchController: UISearchController)
   {
     self.searchResults.removeAll(keepCapacity: false)
@@ -285,7 +326,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     tableView.reloadData()
   }
   
-  // Mark:- Filter method to get distinct values.
+  // MARK: - Filter method to get distinct values
+  
   func filteredList(filterItem: String) -> [String]? {
 
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -319,14 +361,14 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     return resultArray
   }
   
-  // MARK:- Helper Methods
+  // MARK: - Helper Methods
+  
   private func showAlertWithTitle(title: String, message: String, cancelButtonTitle: String) {
     // Initialize Alert Controller
     let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
     
     // Configure Alert Controller
     alertController.addAction(UIAlertAction(title: cancelButtonTitle, style: .Default, handler: { (action) -> Void in
-//      self.reloadFullList()
     }))
     
     // Present Alert Controller
@@ -334,6 +376,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   // MARK: - Table view data source
+  
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     if self.resultSearchController.active {
       return 1
@@ -395,7 +438,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
   }
 
-  // MARK:- Fetched Results Controller Delegate Methods
+  // MARK: - Fetched Results Controller Delegate Methods
+  
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
     tableView.beginUpdates()
   }
@@ -431,6 +475,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   // MARK: - Navigation
+  
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if let destination = segue.destinationViewController as? LWPickerController {
       destination.filterKey = sender as? String
@@ -441,7 +486,9 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
 }
 
 extension LWSuburbListController: LWPickerControlDelegate {
-  // Mark:- Picker delegate method
+  
+  // MARK: - Picker delegate method
+  
   func didSelectPickerValueFilterKey(filterKey: String, value: String) {
     print(value)
     fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "%K == %@", filterKey, value)

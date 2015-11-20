@@ -32,7 +32,8 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
 
     }
 
-  // Mark:- Table view datasource.
+  // MARK: - Table view datasource.
+  
   func numberOfSectionsInTableView(tableView: UITableView) -> Int {
     return 1
   }
@@ -55,7 +56,8 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
     return cell
   }
   
-  // Mark:- Table view delegate
+  // MARK: - Table view delegate
+  
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     print("Selected Row # \(indexPath.row)")
     if let pickerDelegate = pickerDelegate {
