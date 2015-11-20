@@ -146,22 +146,10 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         // Save data
         self.saveDataIntoContext(context)
         
-        self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
-        self.fetchedResultsController.fetchRequest.predicate = nil
+        // Fetch saved data from store.
+        self.fetchAllDataFromStore()
         
-        do {
-          try self.fetchedResultsController.performFetch()
-        } catch {
-          let fetchError = error as NSError
-          print("\(fetchError), \(fetchError.userInfo)")
-        }
-        
-        dispatch_async(dispatch_get_main_queue()) {
-          self.tableView.reloadData()
-        }
-        
-      }
-      catch {
+      } catch {
         print("Error: \(error)")
       }
       
@@ -230,6 +218,21 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         self.showAlertWithTitle("Warning!", message: "Error while saving data! Error : \(saveError), \(saveError.userInfo)", cancelButtonTitle: "OK")
       }
       return
+    }
+  }
+  
+  // MARK:- Fetch all data from store.
+  func fetchAllDataFromStore() {
+    self.fetchedResultsController.fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
+    fetchedResultsController.fetchRequest.predicate = nil
+    do {
+      try fetchedResultsController.performFetch()
+    } catch {
+      fatalError("Error while fetching venue list")
+    }
+    
+    dispatch_async(dispatch_get_main_queue()) {
+      self.tableView.reloadData()
     }
   }
   
