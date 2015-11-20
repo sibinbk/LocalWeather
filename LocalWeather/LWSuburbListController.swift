@@ -442,6 +442,20 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }
   }
 
+  // MARK: - Table view data source
+  
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let venue: Venue
+    
+    if self.resultSearchController.active {
+      venue = self.searchResults[indexPath.row]
+    } else {
+      venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
+    }
+    
+    performSegueWithIdentifier("suburbDetailSegue", sender: venue)
+  }
+  
   // MARK: - Fetched Results Controller Delegate Methods
   
   func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -481,10 +495,18 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   // MARK: - Navigation
   
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    if let destination = segue.destinationViewController as? LWPickerController {
-      destination.filterKey = sender as? String
-      destination.filteredListArray = self.filteredListArray
-      destination.pickerDelegate = self
+    if segue.identifier == "pickerSegue" {
+      if let destination = segue.destinationViewController as? LWPickerController {
+        destination.filterKey = sender as? String
+        destination.filteredListArray = self.filteredListArray
+        destination.pickerDelegate = self
+      }
+    }
+    
+    if segue.identifier == "suburbDetailSegue" {
+      if let destination = segue.destinationViewController as? LWSuburbDetailsController {
+        destination.venue = sender as? Venue
+      }
     }
   }
 }
