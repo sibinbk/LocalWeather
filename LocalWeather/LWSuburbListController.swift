@@ -11,8 +11,8 @@ import CoreData
 
 class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
   
-  let urlString = "https://dnu5embx6omws.cloudfront.net/venues/weather.json"
-  let ReuseIdentifierCell = "SuburbCell"
+  private let urlString = "https://dnu5embx6omws.cloudfront.net/venues/weather.json"
+  private let ReuseIdentifierCell = "SuburbCell"
   
   var searchResults = [Venue]()
   var resultSearchController: UISearchController!
@@ -50,7 +50,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     self.tableView.tableHeaderView = self.resultSearchController.searchBar
     
     // Load json weather data.
-    getWeatherData()
+    loadWeatherData(urlString)
     
   }
   
@@ -63,8 +63,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   
   @IBAction func reloadWeatherData(sender: UIBarButtonItem) {
     print("Refresh button pressed")
-    
-    self.getWeatherData()
+    // Reload weather data
+    loadWeatherData(urlString)
   }
     
   @IBAction func sortList(sender: AnyObject) {
@@ -118,11 +118,11 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     presentViewController(actionSheet, animated: true, completion: nil)
   }
   
-  func getWeatherData() {
+  func loadWeatherData(urlString: String) {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
     
-    let url = NSURL(string: self.urlString)
+    let url = NSURL(string: urlString)
     let session = NSURLSession.sharedSession()
     
     let dataTask = session.dataTaskWithURL(url!, completionHandler: { (data,response, error) -> Void in
