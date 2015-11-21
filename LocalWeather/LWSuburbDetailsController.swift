@@ -22,6 +22,7 @@ class LWSuburbDetailsController: UIViewController {
   @IBOutlet weak var humidityLabel: UILabel!
   @IBOutlet weak var sportLabel: UILabel!
   @IBOutlet weak var weatherIconLabel: UILabel! // temporary label
+  @IBOutlet weak var weatherIcon: UIImageView!
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +73,9 @@ class LWSuburbDetailsController: UIViewController {
       
       if let weatherIcon = venue!.weatherIcon {
         weatherIconLabel.text = weatherIcon
+        let weatherImageName = "\(weatherIcon).png"
+        print(weatherImageName)
+        self.weatherIcon.image = UIImage(named: weatherImageName)
       } else {
         weatherIconLabel.text = "NA"
       }
