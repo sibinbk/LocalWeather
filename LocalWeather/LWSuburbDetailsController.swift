@@ -17,6 +17,10 @@ class LWSuburbDetailsController: UIViewController {
   @IBOutlet weak var countryLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
   @IBOutlet weak var weatherConditionLabel: UILabel!
+  @IBOutlet weak var feelsLikeLabel: UILabel!
+  @IBOutlet weak var windLabel: UILabel!
+  @IBOutlet weak var humidityLabel: UILabel!
+  @IBOutlet weak var sportLabel: UILabel!
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,7 @@ class LWSuburbDetailsController: UIViewController {
       }
       
       if let temperature = venue!.temperature {
-        temperatureLabel.text = ("\(temperature) C")
+        temperatureLabel.text = ("\(temperature)\u{00b0}C")
       } else {
         temperatureLabel.text = "NA"
       }
@@ -38,8 +42,31 @@ class LWSuburbDetailsController: UIViewController {
       if let weatherCondition = venue!.weatherCondition {
         weatherConditionLabel.text = weatherCondition
       } else {
-        weatherConditionLabel.text = "NA"
+        weatherConditionLabel.text = ""
       }
       
+      if let feelsLike = venue!.feelsLike {
+        feelsLikeLabel.text = ("Feels Like: \(feelsLike)\u{00b0}C")
+      } else {
+        feelsLikeLabel.text = "Feels Like: NA"
+      }
+
+      if let wind = venue!.wind {
+        windLabel.text = wind
+      } else {
+        windLabel.text = "Wind: NA"
+      }
+
+      if let humidity = venue!.humidity {
+        humidityLabel.text = humidity
+      } else {
+        humidityLabel.text = "Humidity: NA"
+      }
+
+      if let sport = venue!.sport {
+        sportLabel.text = "Sport: \(sport)"
+      } else {
+        sportLabel.text = "Sport: NA"
+      }
     }
 }

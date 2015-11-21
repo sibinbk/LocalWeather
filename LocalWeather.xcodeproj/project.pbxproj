@@ -19,7 +19,7 @@
 		C320B8641BFB5D0900575276 /* Venue+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8621BFB5D0900575276 /* Venue+CoreDataProperties.swift */; };
 		C320B8651BFB5D0900575276 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8631BFB5D0900575276 /* Venue.swift */; };
 		C320B8681BFDEE0500575276 /* LWPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8671BFDEE0500575276 /* LWPickerController.swift */; };
-		C320B86A1BFEBC9B00575276 /* LWSuburbDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8691BFEBC9B00575276 /* LWSuburbDetailsController.swift */; };
+		C342007D1C00081900B37ABC /* LWSuburbDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C320B8691BFEBC9B00575276 /* LWSuburbDetailsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,7 +284,7 @@
 			files = (
 				C320B8361BF95C1400575276 /* LocalWeather.xcdatamodeld in Sources */,
 				C320B8651BFB5D0900575276 /* Venue.swift in Sources */,
-				C320B86A1BFEBC9B00575276 /* LWSuburbDetailsController.swift in Sources */,
+				C342007D1C00081900B37ABC /* LWSuburbDetailsController.swift in Sources */,
 				C320B8641BFB5D0900575276 /* Venue+CoreDataProperties.swift in Sources */,
 				C320B85F1BF95CDC00575276 /* LWSuburbListController.swift in Sources */,
 				C320B82E1BF95C1400575276 /* AppDelegate.swift in Sources */,

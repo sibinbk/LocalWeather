@@ -119,14 +119,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Flemingtone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaJ-Cy-oJe">
-                                <rect key="frame" x="254" y="91" width="94" height="21"/>
+                                <rect key="frame" x="254" y="119" width="94" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Australia" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybk-Ld-ub8">
-                                <rect key="frame" x="268" y="149" width="67" height="21"/>
+                                <rect key="frame" x="267" y="149" width="67" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -140,7 +140,35 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAN-TI-0WN">
-                                <rect key="frame" x="273" y="381" width="54" height="21"/>
+                                <rect key="frame" x="273" y="219" width="54" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sport : Horse Racing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ki6-gT-OKC">
+                                <rect key="frame" x="221" y="501" width="159" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feels like : 14 C" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CIG-Kc-XMs">
+                                <rect key="frame" x="241" y="392" width="118" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wind: West at 16kph" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7p-aM-wlo">
+                                <rect key="frame" x="222" y="420" width="158" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Humidity: 91%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCb-59-OfN">
+                                <rect key="frame" x="246" y="449" width="109" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -151,20 +179,32 @@
                         <color key="backgroundColor" red="0.43455287089907191" green="0.6711298367159757" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Wwo-0g-fl7" firstAttribute="centerX" secondItem="zaJ-Cy-oJe" secondAttribute="centerX" id="2YO-Gb-44W"/>
-                            <constraint firstItem="gAN-TI-0WN" firstAttribute="top" secondItem="Wwo-0g-fl7" secondAttribute="bottom" constant="45" id="D5e-6H-dix"/>
+                            <constraint firstItem="ki6-gT-OKC" firstAttribute="top" secondItem="YCb-59-OfN" secondAttribute="bottom" constant="32" id="5CV-OA-I1s"/>
+                            <constraint firstItem="Wwo-0g-fl7" firstAttribute="top" secondItem="gAN-TI-0WN" secondAttribute="bottom" constant="24" id="9sR-hY-VwF"/>
                             <constraint firstItem="ybk-Ld-ub8" firstAttribute="centerX" secondItem="zaJ-Cy-oJe" secondAttribute="centerX" id="GVU-sp-Iua"/>
                             <constraint firstItem="Wwo-0g-fl7" firstAttribute="centerY" secondItem="kXV-Yz-udc" secondAttribute="centerY" id="Gtp-bX-glG"/>
+                            <constraint firstItem="zaJ-Cy-oJe" firstAttribute="top" secondItem="dAb-r2-Sbb" secondAttribute="bottom" constant="55" id="Lt3-Zv-akS"/>
                             <constraint firstItem="gAN-TI-0WN" firstAttribute="centerX" secondItem="kXV-Yz-udc" secondAttribute="centerX" id="SJV-Wr-JL8"/>
-                            <constraint firstItem="ybk-Ld-ub8" firstAttribute="top" secondItem="zaJ-Cy-oJe" secondAttribute="bottom" constant="38" id="dTU-Dq-BOG"/>
+                            <constraint firstItem="y7p-aM-wlo" firstAttribute="top" secondItem="CIG-Kc-XMs" secondAttribute="bottom" constant="8" id="ZKm-1O-g9c"/>
+                            <constraint firstItem="y7p-aM-wlo" firstAttribute="centerX" secondItem="kXV-Yz-udc" secondAttribute="centerX" id="cPe-Bd-qen"/>
+                            <constraint firstItem="ybk-Ld-ub8" firstAttribute="top" secondItem="zaJ-Cy-oJe" secondAttribute="bottom" constant="10" id="dTU-Dq-BOG"/>
+                            <constraint firstItem="ki6-gT-OKC" firstAttribute="centerX" secondItem="kXV-Yz-udc" secondAttribute="centerX" id="gdV-Sh-Ncv"/>
+                            <constraint firstItem="WOn-eH-zfC" firstAttribute="top" secondItem="ki6-gT-OKC" secondAttribute="bottom" constant="78" id="idY-LF-cfd"/>
                             <constraint firstItem="Wwo-0g-fl7" firstAttribute="centerX" secondItem="kXV-Yz-udc" secondAttribute="centerX" id="ijC-Kn-jXK"/>
-                            <constraint firstItem="Wwo-0g-fl7" firstAttribute="top" secondItem="ybk-Ld-ub8" secondAttribute="bottom" constant="94" id="wP9-ju-ZqR"/>
+                            <constraint firstItem="CIG-Kc-XMs" firstAttribute="centerX" secondItem="kXV-Yz-udc" secondAttribute="centerX" id="mee-Xc-QIu"/>
+                            <constraint firstItem="YCb-59-OfN" firstAttribute="centerX" secondItem="kXV-Yz-udc" secondAttribute="centerX" id="tmU-bC-luG"/>
+                            <constraint firstItem="YCb-59-OfN" firstAttribute="top" secondItem="y7p-aM-wlo" secondAttribute="bottom" constant="8" id="zzX-94-0FM"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="countryLabel" destination="ybk-Ld-ub8" id="cIj-kk-pai"/>
+                        <outlet property="feelsLikeLabel" destination="CIG-Kc-XMs" id="CjH-Sa-JyZ"/>
+                        <outlet property="humidityLabel" destination="YCb-59-OfN" id="N61-g4-tVc"/>
+                        <outlet property="sportLabel" destination="ki6-gT-OKC" id="Kka-n1-Ipb"/>
                         <outlet property="temperatureLabel" destination="Wwo-0g-fl7" id="5zI-Rc-vEZ"/>
                         <outlet property="venueLabel" destination="zaJ-Cy-oJe" id="md5-Ql-cEO"/>
                         <outlet property="weatherConditionLabel" destination="gAN-TI-0WN" id="9aW-qf-auL"/>
+                        <outlet property="windLabel" destination="y7p-aM-wlo" id="qMw-Bw-IlV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nia-Ja-fnY" userLabel="First Responder" sceneMemberID="firstResponder"/>

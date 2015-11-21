@@ -2,7 +2,7 @@
 //  Venue+CoreDataProperties.swift
 //  LocalWeather
 //
-//  Created by Sibin Baby on 19/11/2015.
+//  Created by Sibin Baby on 20/11/2015.
 //  Copyright © 2015 Sibin Baby. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,5 +20,9 @@ extension Venue {
     @NSManaged var venueName: String?
     @NSManaged var weatherCondition: String?
     @NSManaged var weatherIcon: String?
+    @NSManaged var wind: String?
+    @NSManaged var humidity: String?
+    @NSManaged var feelsLike: NSNumber?
+    @NSManaged var sport: String?
 
 }

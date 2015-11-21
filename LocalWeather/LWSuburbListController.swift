@@ -238,8 +238,30 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         newItem.weatherIcon = weatherIcon
       }
       
-      if let temperature = dataItem["_weatherTemp"] as? String {
-        newItem.temperature = Int(temperature)
+      if let wind = dataItem["_weatherWind"] as? String {
+        newItem.wind = wind
+      }
+      
+      if let humidity = dataItem["_weatherHumidity"] as? String {
+        newItem.humidity = humidity
+      }
+      
+      if let weatherTemperature = dataItem["_weatherTemp"] as? String {
+        if let temperature = Int(weatherTemperature) {
+          newItem.temperature = temperature
+        }
+      }
+      
+      if let weatherFeelsLike = dataItem["_weatherFeelsLike"] as? String {
+        if let feelsLike = Int(weatherFeelsLike) {
+          newItem.feelsLike = feelsLike
+        }
+      }
+      
+      if let sport = dataItem["_sport"] as? NSDictionary {
+        if let sportDescription = sport["_description"] as? String {
+          newItem.sport = sportDescription
+        }
       }
       
       if let updateTime = dataItem["_weatherLastUpdated"] as? Double {
@@ -436,7 +458,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     cell.updateTimeLabel.text = venueInfo.stringForUpdateTime()
     
     if let temperature = venueInfo.temperature {
-      cell.temperatureLabel.text = ("\(temperature) C")
+      cell.temperatureLabel.text = ("\(temperature)\u{00b0}C")
     } else {
       cell.temperatureLabel.text = "NA"
     }
