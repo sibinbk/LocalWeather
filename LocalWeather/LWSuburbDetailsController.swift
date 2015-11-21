@@ -21,6 +21,7 @@ class LWSuburbDetailsController: UIViewController {
   @IBOutlet weak var windLabel: UILabel!
   @IBOutlet weak var humidityLabel: UILabel!
   @IBOutlet weak var sportLabel: UILabel!
+  @IBOutlet weak var weatherIconLabel: UILabel! // temporary label
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,12 @@ class LWSuburbDetailsController: UIViewController {
         sportLabel.text = "Sport: \(sport)"
       } else {
         sportLabel.text = "Sport: NA"
+      }
+      
+      if let weatherIcon = venue!.weatherIcon {
+        weatherIconLabel.text = weatherIcon
+      } else {
+        weatherIconLabel.text = "NA"
       }
     }
 }

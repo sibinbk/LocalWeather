@@ -462,6 +462,19 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     } else {
       cell.temperatureLabel.text = "NA"
     }
+    
+    if let weatherCondition = venueInfo.weatherCondition {
+      cell.weatherConditionLabel.text = weatherCondition
+    } else {
+      cell.weatherConditionLabel.text = "NA"
+    }
+
+    if let weatherIcon = venueInfo.weatherIcon {
+      cell.weatherIconLabel.text = weatherIcon
+    } else {
+      cell.weatherIconLabel.text = "NA"
+    }
+
   }
 
   // MARK: - Table view data source
