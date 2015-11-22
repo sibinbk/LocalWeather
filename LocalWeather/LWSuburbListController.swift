@@ -76,7 +76,9 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     self.tableView.tableHeaderView = self.resultSearchController.searchBar
     
     // Check connectivity before network call.
-  
+    
+    self.refreshControl?.addTarget(self, action: "handlePullToRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+
     if connectedToNetwork() {
       loadWeatherData(urlString)
     } else {
@@ -157,6 +159,20 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }))
     
     presentViewController(actionSheet, animated: true, completion: nil)
+  }
+  
+  // MARK: - Pull to refresh
+  
+  func handlePullToRefresh(refreshControl: UIRefreshControl) {
+    if connectedToNetwork() {
+      loadWeatherData(urlString)
+    } else {
+      dispatch_async(dispatch_get_main_queue()) {
+        self.showAlertWithTitle("No Network Connectivity!", message: "Please check your internet connectivity", cancelButtonTitle: "OK")
+      }
+    }
+    
+    refreshControl.endRefreshing()
   }
   
   func loadWeatherData(urlString: String) {
