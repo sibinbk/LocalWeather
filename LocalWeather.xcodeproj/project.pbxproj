@@ -98,6 +98,9 @@
 		C384BDC91C01FA6800F78CBC /* tstorms.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAE1C01FA6800F78CBC /* tstorms.png */; };
 		C384BDCA1C01FA6800F78CBC /* tstorms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAF1C01FA6800F78CBC /* tstorms@2x.png */; };
 		C384BDCB1C01FA6800F78CBC /* tstorms@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDB01C01FA6800F78CBC /* tstorms@3x.png */; };
+		C384BDCF1C024EE200F78CBC /* hazy.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDCC1C024EE200F78CBC /* hazy.png */; };
+		C384BDD01C024EE200F78CBC /* hazy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDCD1C024EE200F78CBC /* hazy@2x.png */; };
+		C384BDD11C024EE200F78CBC /* hazy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDCE1C024EE200F78CBC /* hazy@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -215,6 +218,9 @@
 		C384BDAE1C01FA6800F78CBC /* tstorms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tstorms.png; sourceTree = "<group>"; };
 		C384BDAF1C01FA6800F78CBC /* tstorms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tstorms@2x.png"; sourceTree = "<group>"; };
 		C384BDB01C01FA6800F78CBC /* tstorms@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tstorms@3x.png"; sourceTree = "<group>"; };
+		C384BDCC1C024EE200F78CBC /* hazy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hazy.png; sourceTree = "<group>"; };
+		C384BDCD1C024EE200F78CBC /* hazy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hazy@2x.png"; sourceTree = "<group>"; };
+		C384BDCE1C024EE200F78CBC /* hazy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hazy@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -362,6 +368,9 @@
 				C384BD991C01FA6800F78CBC /* cloudy.png */,
 				C384BD9A1C01FA6800F78CBC /* cloudy@2x.png */,
 				C384BD9B1C01FA6800F78CBC /* cloudy@3x.png */,
+				C384BDCC1C024EE200F78CBC /* hazy.png */,
+				C384BDCD1C024EE200F78CBC /* hazy@2x.png */,
+				C384BDCE1C024EE200F78CBC /* hazy@3x.png */,
 				C384BD9C1C01FA6800F78CBC /* fog.png */,
 				C384BD9D1C01FA6800F78CBC /* fog@2x.png */,
 				C384BD9E1C01FA6800F78CBC /* fog@3x.png */,
@@ -534,7 +543,9 @@
 				C34200F71C01794E00B37ABC /* Sort@3x.png in Resources */,
 				C32A6ECE1C0183EA000727D7 /* cell_tstorms@2x.png in Resources */,
 				C32A6EB81C0183EA000727D7 /* cell_cloudy.png in Resources */,
+				C384BDCF1C024EE200F78CBC /* hazy.png in Resources */,
 				C34200F31C01794E00B37ABC /* Search@2x.png in Resources */,
+				C384BDD01C024EE200F78CBC /* hazy@2x.png in Resources */,
 				C34200DB1C0170F100B37ABC /* humidity@3x.png in Resources */,
 				C384BDB91C01FA6800F78CBC /* fog@3x.png in Resources */,
 				C384BD8F1C01BCCA00F78CBC /* Left@3x.png in Resources */,
@@ -576,6 +587,7 @@
 				C320B8381BF95C1400575276 /* Assets.xcassets in Resources */,
 				C384BDC11C01FA6800F78CBC /* partlycloudy@2x.png in Resources */,
 				C384BD8C1C01BCCA00F78CBC /* Close@3x.png in Resources */,
+				C384BDD11C024EE200F78CBC /* hazy@3x.png in Resources */,
 				C384BDB11C01FA6800F78CBC /* clear.png in Resources */,
 				C34200DD1C0170F100B37ABC /* wind@2x.png in Resources */,
 				C34200F11C01794E00B37ABC /* Restart@3x.png in Resources */,
