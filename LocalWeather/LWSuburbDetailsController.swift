@@ -47,9 +47,9 @@ class LWSuburbDetailsController: UIViewController {
       }
       
       if let feelsLike = venue!.feelsLike {
-        feelsLikeLabel.text = ("Feels Like: \(feelsLike)\u{00b0}C")
+        feelsLikeLabel.text = ("Feels Like \n\(feelsLike)\u{00b0}C")
       } else {
-        feelsLikeLabel.text = "Feels Like: NA"
+        feelsLikeLabel.text = "Feels Like \nNA"
       }
 
       if let wind = venue!.wind {
@@ -74,4 +74,9 @@ class LWSuburbDetailsController: UIViewController {
         self.weatherIcon.image = UIImage(named: weatherIcon)
       }
   }
+  
+  @IBAction func dismissView(sender: AnyObject) {
+    dismissViewControllerAnimated(true, completion: nil)
+  }
+
 }

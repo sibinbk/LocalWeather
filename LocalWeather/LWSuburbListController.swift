@@ -487,8 +487,9 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     } else {
       venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
     }
-    
     performSegueWithIdentifier("suburbDetailSegue", sender: venue)
+    
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
   
   // MARK: - Fetched Results Controller Delegate Methods
