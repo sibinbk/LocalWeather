@@ -79,7 +79,6 @@ class LWSuburbDetailsController: UIViewController {
   }
   
   @IBAction func dismissView(sender: AnyObject) {
-    print("hii")
     dismissViewControllerAnimated(true, completion: nil)
   }
 
