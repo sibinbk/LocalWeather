@@ -16,11 +16,15 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
 
   var filterKey: String?
   var filteredListArray: [String]?
+  var filterValue = ""
+  
+  private var selectedIndex: Int!
   
   weak var pickerDelegate: LWPickerControlDelegate?
   
   @IBOutlet weak var popUpView: UIView!
   @IBOutlet weak var pickerTableView: UITableView!
+  @IBOutlet weak var titleLabel: UILabel!
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +40,27 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(true)
+    
+    // Set previous selected value index
+    if let filteredListArray =  filteredListArray {
+      if let index = filteredListArray.indexOf(filterValue) {
+        selectedIndex = index
+      }
+    }
+    
+    // Set PopUp Picker title
+    if let pickerTitle = filterKey {
+      switch pickerTitle {
+        case "country":
+          titleLabel.text = "Country"
+          break
+        case "weatherCondition":
+          titleLabel.text = "Weather"
+          break
+        default:
+          titleLabel.text = ""
+      }
+    }
     
     showPopUpWithAnimation()
   }
@@ -57,10 +82,14 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
     let ReuseIdentifierCell = "PickerCell"
     let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierCell, forIndexPath: indexPath)
     
-    cell.separatorInset = UIEdgeInsetsZero
-    
     if let filteredListArray = filteredListArray {
       cell.textLabel?.text = filteredListArray[indexPath.row] as String
+      
+      if filterValue == filteredListArray[indexPath.row] {
+        cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+      } else {
+        cell.accessoryType = UITableViewCellAccessoryType.None
+      }
     }
     
     return cell

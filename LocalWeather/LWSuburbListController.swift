@@ -18,6 +18,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   var searchResults = [Venue]()
   var resultSearchController: UISearchController!
   var filteredListArray = [String]()
+  var filterValue = ""
   
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -133,6 +134,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     }))
     
     actionSheet.addAction(UIAlertAction(title: "Show All", style: .Default, handler: { (action) -> Void in
+      // Resets filter value and reloads full list.
+      self.filterValue = ""
       self.reloadFullListWithSortedData()
     }))
     
@@ -541,6 +544,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
       if let destination = segue.destinationViewController as? LWPickerController {
         destination.filterKey = sender as? String
         destination.filteredListArray = self.filteredListArray
+        destination.filterValue = self.filterValue
         destination.pickerDelegate = self
       }
     }
@@ -559,6 +563,9 @@ extension LWSuburbListController: LWPickerControlDelegate {
   
   func didSelectPickerValueFilterKey(filterKey: String, value: String) {
     print(value)
+    // Stores picker selection to pass it during next selection.
+    self.filterValue = value
+    
     fetchedResultsController.fetchRequest.predicate = NSPredicate(format: "%K == %@", filterKey, value)
     do {
       try fetchedResultsController.performFetch()

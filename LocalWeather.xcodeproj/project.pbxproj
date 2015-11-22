@@ -95,9 +95,9 @@
 		C384BDC61C01FA6800F78CBC /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAB1C01FA6800F78CBC /* snow.png */; };
 		C384BDC71C01FA6800F78CBC /* snow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAC1C01FA6800F78CBC /* snow@2x.png */; };
 		C384BDC81C01FA6800F78CBC /* snow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAD1C01FA6800F78CBC /* snow@3x.png */; };
-		C384BDC91C01FA6800F78CBC /* tstorm.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAE1C01FA6800F78CBC /* tstorm.png */; };
-		C384BDCA1C01FA6800F78CBC /* tstorm@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAF1C01FA6800F78CBC /* tstorm@2x.png */; };
-		C384BDCB1C01FA6800F78CBC /* tstorm@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDB01C01FA6800F78CBC /* tstorm@3x.png */; };
+		C384BDC91C01FA6800F78CBC /* tstorms.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAE1C01FA6800F78CBC /* tstorms.png */; };
+		C384BDCA1C01FA6800F78CBC /* tstorms@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDAF1C01FA6800F78CBC /* tstorms@2x.png */; };
+		C384BDCB1C01FA6800F78CBC /* tstorms@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C384BDB01C01FA6800F78CBC /* tstorms@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,9 +212,9 @@
 		C384BDAB1C01FA6800F78CBC /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
 		C384BDAC1C01FA6800F78CBC /* snow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snow@2x.png"; sourceTree = "<group>"; };
 		C384BDAD1C01FA6800F78CBC /* snow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snow@3x.png"; sourceTree = "<group>"; };
-		C384BDAE1C01FA6800F78CBC /* tstorm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tstorm.png; sourceTree = "<group>"; };
-		C384BDAF1C01FA6800F78CBC /* tstorm@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tstorm@2x.png"; sourceTree = "<group>"; };
-		C384BDB01C01FA6800F78CBC /* tstorm@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tstorm@3x.png"; sourceTree = "<group>"; };
+		C384BDAE1C01FA6800F78CBC /* tstorms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tstorms.png; sourceTree = "<group>"; };
+		C384BDAF1C01FA6800F78CBC /* tstorms@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tstorms@2x.png"; sourceTree = "<group>"; };
+		C384BDB01C01FA6800F78CBC /* tstorms@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tstorms@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,9 +380,9 @@
 				C384BDAB1C01FA6800F78CBC /* snow.png */,
 				C384BDAC1C01FA6800F78CBC /* snow@2x.png */,
 				C384BDAD1C01FA6800F78CBC /* snow@3x.png */,
-				C384BDAE1C01FA6800F78CBC /* tstorm.png */,
-				C384BDAF1C01FA6800F78CBC /* tstorm@2x.png */,
-				C384BDB01C01FA6800F78CBC /* tstorm@3x.png */,
+				C384BDAE1C01FA6800F78CBC /* tstorms.png */,
+				C384BDAF1C01FA6800F78CBC /* tstorms@2x.png */,
+				C384BDB01C01FA6800F78CBC /* tstorms@3x.png */,
 			);
 			name = ViewIcons;
 			sourceTree = "<group>";
@@ -567,7 +567,7 @@
 				C384BD8D1C01BCCA00F78CBC /* Left.png in Resources */,
 				C384BDC01C01FA6800F78CBC /* partlycloudy.png in Resources */,
 				C32A6EBC1C0183EA000727D7 /* cell_fog@2x.png in Resources */,
-				C384BDCB1C01FA6800F78CBC /* tstorm@3x.png in Resources */,
+				C384BDCB1C01FA6800F78CBC /* tstorms@3x.png in Resources */,
 				C384BDBD1C01FA6800F78CBC /* mostlycloudy.png in Resources */,
 				C32A6EC91C0183EA000727D7 /* cell_rain@3x.png in Resources */,
 				C384BDC51C01FA6800F78CBC /* rain@3x.png in Resources */,
@@ -581,14 +581,14 @@
 				C34200F11C01794E00B37ABC /* Restart@3x.png in Resources */,
 				C34200F41C01794E00B37ABC /* Search@3x.png in Resources */,
 				C32A6ECD1C0183EA000727D7 /* cell_tstorms.png in Resources */,
-				C384BDCA1C01FA6800F78CBC /* tstorm@2x.png in Resources */,
+				C384BDCA1C01FA6800F78CBC /* tstorms@2x.png in Resources */,
 				C32A6EB91C0183EA000727D7 /* cell_cloudy@2x.png in Resources */,
 				C384BDC61C01FA6800F78CBC /* snow.png in Resources */,
 				C384BDB51C01FA6800F78CBC /* cloudy@2x.png in Resources */,
 				C32A6ECB1C0183EA000727D7 /* cell_snow@2x.png in Resources */,
 				C34200F61C01794E00B37ABC /* Sort@2x.png in Resources */,
 				C32A6ECA1C0183EA000727D7 /* cell_snow.png in Resources */,
-				C384BDC91C01FA6800F78CBC /* tstorm.png in Resources */,
+				C384BDC91C01FA6800F78CBC /* tstorms.png in Resources */,
 				C32A6ECF1C0183EA000727D7 /* cell_tstorms@3x.png in Resources */,
 				C384BDC31C01FA6800F78CBC /* rain.png in Resources */,
 				C384BDBF1C01FA6800F78CBC /* mostlycloudy@3x.png in Resources */,

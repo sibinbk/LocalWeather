@@ -24,7 +24,7 @@ class LWSuburbDetailsController: UIViewController {
   @IBOutlet weak var weatherIcon: UIImageView!
   
     override func viewDidLoad() {
-        super.viewDidLoad()
+      super.viewDidLoad()
 
       if let venueName = venue!.venueName {
         venueLabel.text = venueName
