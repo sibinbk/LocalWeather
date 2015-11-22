@@ -124,7 +124,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="MW8-iY-2Zq" kind="presentation" identifier="pickerSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="5sd-K5-2Cp"/>
-                        <segue destination="TT2-qk-vTY" kind="presentation" identifier="suburbDetailSegue" id="dFz-w2-cB1"/>
+                        <segue destination="TT2-qk-vTY" kind="presentation" identifier="suburbDetailSegue" id="vSv-RF-kvd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jjn-pr-EW0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -319,7 +319,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nia-Ja-fnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768" y="112"/>
+            <point key="canvasLocation" x="1873" y="50"/>
         </scene>
         <!--Picker Controller-->
         <scene sceneID="Laf-q8-Sf3">
