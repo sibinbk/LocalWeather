@@ -469,10 +469,16 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
       cell.temperatureLabel.text = "NA"
     }
     
+    // Sets Cell backgroud color  and weather icon as per weather condition.
     if let weatherIconName = venueInfo.weatherIcon {
+      let colorString = venueInfo.colorStringForWeatherCondition(weatherIconName)
       cell.weatherIcon.image = UIImage(named: "cell_\(weatherIconName)")
+      cell.contentView.backgroundColor = UIColor(colorCode: colorString, alpha: 1.0)
+      
     } else {
       cell.weatherIcon.image = nil
+      // 'Wet Asphalt' color when weather info not available
+      cell.contentView.backgroundColor = UIColor(colorCode: "34495E", alpha: 1.0)
     }
 
   }
@@ -561,5 +567,22 @@ extension LWSuburbListController: LWPickerControlDelegate {
     }
     
     self.tableView.reloadData()
+  }
+}
+
+// HEX string to UIColor conversion extension
+
+extension UIColor {
+  convenience init(colorCode: String, alpha: Float = 1.0){
+    let scanner = NSScanner(string:colorCode)
+    var color:UInt32 = 0;
+    scanner.scanHexInt(&color)
+    
+    let mask = 0x000000FF
+    let r = CGFloat(Float(Int(color >> 16) & mask)/255.0)
+    let g = CGFloat(Float(Int(color >> 8) & mask)/255.0)
+    let b = CGFloat(Float(Int(color) & mask)/255.0)
+    
+    self.init(red: r, green: g, blue: b, alpha: CGFloat(alpha))
   }
 }

@@ -70,8 +70,11 @@ class LWSuburbDetailsController: UIViewController {
         sportLabel.text = "Sport: NA"
       }
       
-      if let weatherIcon = venue!.weatherIcon {
-        self.weatherIcon.image = UIImage(named: weatherIcon)
+      // Sets weather icon and view color.
+      if let weatherIconName = venue!.weatherIcon {
+        self.weatherIcon.image = UIImage(named: weatherIconName)
+        let colorString = venue!.colorStringForWeatherCondition(weatherIconName)
+        view.backgroundColor = UIColor(colorCode: colorString, alpha: 1.0)
       }
   }
   

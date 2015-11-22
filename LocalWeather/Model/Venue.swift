@@ -9,20 +9,7 @@
 import Foundation
 import CoreData
 
-enum Icon: String {
-  case Clear = "clear"
-  case Cloudy = "cloudy"
-  case PartlyCloudy = "partlycloudy"
-  case MostlyCloudy = "mostlycloudy"
-  case Rain = "rain"
-  case ThunderStorm = "tstorms"
-  case Snow = "snow"
-  case Fog = "fog"
-  case Haze = "hazy"
-}
-
 class Venue: NSManagedObject {
-
 
   // Converts NSDate to String
 
@@ -76,5 +63,53 @@ class Venue: NSManagedObject {
     }
     
     return weather
+  }
+  
+  // Returns color string  for each weather condition
+  
+  func colorStringForWeatherCondition(condition: String) -> String {
+    var colorString: String
+    
+    switch condition {
+    case "clear":
+      // Orange
+      colorString = "F39C12"
+      break
+    case "cloudy":
+      // Belize Hole (Dark Blue)
+      colorString = "2980B9"
+      break
+    case "partlycloudy":
+      // Peter Rive (Light Blue)
+      colorString = "3498DB"
+      break
+    case "mostlycloudy":
+      // Dark blue Material color
+      colorString = "01579B"
+      break
+    case "rain":
+      // Light Gray
+      colorString = "5C5470"
+      break
+    case "tstorms":
+      // Dark gray
+      colorString = "352F44"
+      break
+    case "snow":
+      // Turquoise
+      colorString = "1ABC9C"
+      break
+    case "fog":
+      colorString = "7F8C8D"
+      break
+    case "hazy":
+      colorString = "CD9D77"
+      break
+    default:
+      // Wet Asphalt
+      colorString = "34495E"
+    }
+    
+    return colorString
   }
 }
