@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="84"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NOA-Oe-iCZ" id="1gV-Xc-3Nq">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="83.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bendigo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKz-Op-uj8">
@@ -37,7 +37,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 November 2015 5.00 pm " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACJ-cc-Xkt">
-                                            <rect key="frame" x="8" y="58" width="179" height="17"/>
+                                            <rect key="frame" x="8" y="59" width="179" height="17"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -50,37 +50,31 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cloudy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipn-TB-Hxd">
-                                            <rect key="frame" x="541" y="40" width="51" height="20"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_clear.png" translatesAutoresizingMaskIntoConstraints="NO" id="b7H-8n-qcy">
+                                            <rect key="frame" x="560" y="46" width="32" height="32"/>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cloudy" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tc9-V2-sWR">
-                                            <rect key="frame" x="548" y="58" width="44" height="17"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        </imageView>
                                     </subviews>
                                     <animations/>
                                     <color key="backgroundColor" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="ACJ-cc-Xkt" firstAttribute="leading" secondItem="EKz-Op-uj8" secondAttribute="leading" id="FLt-gO-yjk"/>
                                         <constraint firstItem="EKz-Op-uj8" firstAttribute="leading" secondItem="1gV-Xc-3Nq" secondAttribute="leading" constant="8" id="KQS-Pf-IsG"/>
-                                        <constraint firstItem="3hd-2M-FUl" firstAttribute="trailing" secondItem="Tc9-V2-sWR" secondAttribute="trailing" id="L5l-Ks-3WY"/>
                                         <constraint firstItem="EKz-Op-uj8" firstAttribute="top" secondItem="1gV-Xc-3Nq" secondAttribute="top" constant="8" id="ReK-8K-Hln"/>
                                         <constraint firstAttribute="trailing" secondItem="3hd-2M-FUl" secondAttribute="trailing" constant="8" id="Vqo-oG-Z5D"/>
-                                        <constraint firstItem="Tc9-V2-sWR" firstAttribute="top" secondItem="ipn-TB-Hxd" secondAttribute="bottom" constant="-1" id="f35-ab-6O3"/>
-                                        <constraint firstItem="ipn-TB-Hxd" firstAttribute="top" secondItem="3hd-2M-FUl" secondAttribute="bottom" id="ffv-6d-Z9D"/>
+                                        <constraint firstItem="b7H-8n-qcy" firstAttribute="top" secondItem="3hd-2M-FUl" secondAttribute="bottom" constant="6" id="dSd-Bd-qYE"/>
                                         <constraint firstItem="3hd-2M-FUl" firstAttribute="top" secondItem="1gV-Xc-3Nq" secondAttribute="top" constant="4" id="gcg-Fc-jMw"/>
                                         <constraint firstItem="ACJ-cc-Xkt" firstAttribute="top" secondItem="BNj-hE-YOU" secondAttribute="bottom" id="jqP-3j-1iu"/>
-                                        <constraint firstItem="3hd-2M-FUl" firstAttribute="trailing" secondItem="ipn-TB-Hxd" secondAttribute="trailing" id="z4z-mx-6NJ"/>
+                                        <constraint firstItem="b7H-8n-qcy" firstAttribute="centerX" secondItem="3hd-2M-FUl" secondAttribute="centerX" id="wnq-8N-aqx"/>
                                         <constraint firstItem="BNj-hE-YOU" firstAttribute="top" secondItem="EKz-Op-uj8" secondAttribute="bottom" constant="2" id="zBm-J5-UIZ"/>
                                         <constraint firstItem="BNj-hE-YOU" firstAttribute="leading" secondItem="EKz-Op-uj8" secondAttribute="leading" id="znE-2D-2bj"/>
+                                        <constraint firstItem="3hd-2M-FUl" firstAttribute="trailing" secondItem="b7H-8n-qcy" secondAttribute="trailing" id="zzA-IU-kvy"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="zzA-IU-kvy"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
@@ -88,8 +82,7 @@
                                     <outlet property="temperatureLabel" destination="3hd-2M-FUl" id="ILv-X0-S6q"/>
                                     <outlet property="updateTimeLabel" destination="ACJ-cc-Xkt" id="eKO-GS-FyG"/>
                                     <outlet property="venueLabel" destination="EKz-Op-uj8" id="UI9-b3-7nZ"/>
-                                    <outlet property="weatherConditionLabel" destination="ipn-TB-Hxd" id="KPn-my-zs0"/>
-                                    <outlet property="weatherIconLabel" destination="Tc9-V2-sWR" id="fPh-IA-tCc"/>
+                                    <outlet property="weatherIcon" destination="b7H-8n-qcy" id="NKo-ot-sbT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -406,6 +399,7 @@
         <image name="Filter.png" width="25" height="25"/>
         <image name="Restart.png" width="25" height="25"/>
         <image name="Sort.png" width="25" height="25"/>
+        <image name="cell_clear.png" width="32" height="32"/>
         <image name="clear.png" width="160" height="160"/>
         <image name="humidity.png" width="32" height="32"/>
         <image name="wind.png" width="32" height="32"/>

@@ -14,8 +14,7 @@ class LWSuburbCell: UITableViewCell {
   @IBOutlet weak var countryLabel: UILabel!
   @IBOutlet weak var temperatureLabel: UILabel!
   @IBOutlet weak var updateTimeLabel: UILabel!
-  @IBOutlet weak var weatherConditionLabel: UILabel!
-  @IBOutlet weak var weatherIconLabel: UILabel!
+  @IBOutlet weak var weatherIcon: UIImageView!
   
     override func awakeFromNib() {
         super.awakeFromNib()

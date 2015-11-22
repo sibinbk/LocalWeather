@@ -463,16 +463,10 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
       cell.temperatureLabel.text = "NA"
     }
     
-    if let weatherCondition = venueInfo.weatherCondition {
-      cell.weatherConditionLabel.text = weatherCondition
+    if let weatherIconName = venueInfo.weatherIcon {
+      cell.weatherIcon.image = UIImage(named: "cell_\(weatherIconName)")
     } else {
-      cell.weatherConditionLabel.text = "NA"
-    }
-
-    if let weatherIcon = venueInfo.weatherIcon {
-      cell.weatherIconLabel.text = weatherIcon
-    } else {
-      cell.weatherIconLabel.text = "NA"
+      cell.weatherIcon.image = nil
     }
 
   }
