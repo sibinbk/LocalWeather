@@ -55,13 +55,13 @@ class LWSuburbDetailsController: UIViewController {
       if let wind = venue!.wind {
         windLabel.text = wind
       } else {
-        windLabel.text = "Wind: NA"
+        windLabel.text = "NA"
       }
 
       if let humidity = venue!.humidity {
         humidityLabel.text = humidity
       } else {
-        humidityLabel.text = "Humidity: NA"
+        humidityLabel.text = "NA"
       }
 
       if let sport = venue!.sport {

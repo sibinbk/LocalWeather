@@ -239,11 +239,13 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
       }
       
       if let wind = dataItem["_weatherWind"] as? String {
-        newItem.wind = wind
+        // filter out the srting before storing.
+        newItem.wind = wind.stringByReplacingOccurrencesOfString("Wind: ", withString: "")
       }
       
       if let humidity = dataItem["_weatherHumidity"] as? String {
-        newItem.humidity = humidity
+        // filter out the srting before storing.
+        newItem.humidity = humidity.stringByReplacingOccurrencesOfString("Humidity: ", withString: "")
       }
       
       if let weatherTemperature = dataItem["_weatherTemp"] as? String {
