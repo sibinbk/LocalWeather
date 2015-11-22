@@ -47,7 +47,7 @@ class LWSuburbDetailsController: UIViewController {
       }
       
       if let feelsLike = venue!.feelsLike {
-        feelsLikeLabel.text = ("Feels Like \n\(feelsLike)\u{00b0}C")
+        feelsLikeLabel.text = ("Feels Like \(feelsLike)\u{00b0}")
       } else {
         feelsLikeLabel.text = "Feels Like \nNA"
       }
@@ -65,9 +65,9 @@ class LWSuburbDetailsController: UIViewController {
       }
 
       if let sport = venue!.sport {
-        sportLabel.text = "Sport: \(sport)"
+        sportLabel.text = "Sport | \(sport)"
       } else {
-        sportLabel.text = "Sport: NA"
+        sportLabel.text = "Sport | NA"
       }
       
       // Sets weather icon and view color.
