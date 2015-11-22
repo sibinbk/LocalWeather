@@ -25,12 +25,20 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
       
+      // Set pop up views corner radius
+      popUpView.layer.cornerRadius = 10.0
       // Add transperancy to the view
-      self.view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.2)
+      view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.25)
       
       pickerTableView.delegate = self
 
     }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(true)
+    
+    showPopUpWithAnimation()
+  }
 
   // MARK: - Table view datasource.
   
@@ -49,6 +57,8 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
     let ReuseIdentifierCell = "PickerCell"
     let cell = tableView.dequeueReusableCellWithIdentifier(ReuseIdentifierCell, forIndexPath: indexPath)
     
+    cell.separatorInset = UIEdgeInsetsZero
+    
     if let filteredListArray = filteredListArray {
       cell.textLabel?.text = filteredListArray[indexPath.row] as String
     }
@@ -64,6 +74,33 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
       pickerDelegate.didSelectPickerValueFilterKey(filterKey!, value: filteredListArray![indexPath.row])
     }
     
-    dismissViewControllerAnimated(true, completion: nil)
+    removePopUpWithAnimation()
+  }
+
+  @IBAction func dismissPopUp(sender: AnyObject) {
+    removePopUpWithAnimation()
+    }
+  
+  func showPopUpWithAnimation()
+  {
+    self.popUpView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+    self.popUpView.alpha = 0.0;
+    UIView.animateWithDuration(0.3, animations: {
+      self.popUpView.alpha = 1.0
+      self.popUpView.transform = CGAffineTransformMakeScale(1.0, 1.0)
+    });
+  }
+  
+  func removePopUpWithAnimation()
+  {
+    UIView.animateWithDuration(0.3, animations: {
+      self.popUpView.transform = CGAffineTransformMakeScale(0.1, 0.1)
+      self.popUpView.alpha = 0.0;
+      }, completion:{(finished : Bool)  in
+        if (finished)
+        {
+          self.dismissViewControllerAnimated(true, completion: nil)
+        }
+    });
   }
 }
