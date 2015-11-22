@@ -10,72 +10,79 @@
         <scene sceneID="VeI-wt-rxD">
             <objects>
                 <tableViewController id="0dp-Vh-PTw" customClass="LWSuburbListController" customModule="LocalWeather" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="84" sectionHeaderHeight="28" sectionFooterHeight="28" id="mRI-IQ-lwd">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" id="mRI-IQ-lwd">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SuburbCell" rowHeight="84" id="NOA-Oe-iCZ" customClass="LWSuburbCell" customModule="LocalWeather" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="84"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SuburbCell" rowHeight="88" id="NOA-Oe-iCZ" customClass="LWSuburbCell" customModule="LocalWeather" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NOA-Oe-iCZ" id="1gV-Xc-3Nq">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="84"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="87.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bendigo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKz-Op-uj8">
-                                            <rect key="frame" x="8" y="8" width="87" height="29"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="YZx-a6-Puk">
+                                            <rect key="frame" x="15" y="6" width="156.5" height="75.5"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ezh-MG-PKu">
+                                                    <rect key="frame" x="0.0" y="0.0" width="94.5" height="55"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Bendigo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKz-Op-uj8">
+                                                            <rect key="frame" x="0.0" y="0.0" width="95" height="33"/>
+                                                            <animations/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="24"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Australia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNj-hE-YOU">
+                                                            <rect key="frame" x="0.0" y="33" width="64" height="22"/>
+                                                            <animations/>
+                                                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="16"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <animations/>
+                                                </stackView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 November 2015 5.00 pm " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACJ-cc-Xkt">
+                                                    <rect key="frame" x="0.0" y="61" width="156.5" height="14.5"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Australia" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BNj-hE-YOU">
-                                            <rect key="frame" x="8" y="39" width="62" height="20"/>
+                                        </stackView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="fPT-Ey-cXK">
+                                            <rect key="frame" x="553" y="8" width="32" height="72"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hd-2M-FUl">
+                                                    <rect key="frame" x="1" y="0.0" width="31" height="36"/>
+                                                    <animations/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_clear.png" translatesAutoresizingMaskIntoConstraints="NO" id="b7H-8n-qcy">
+                                                    <rect key="frame" x="0.0" y="40" width="32" height="32"/>
+                                                    <animations/>
+                                                </imageView>
+                                            </subviews>
                                             <animations/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 November 2015 5.00 pm " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ACJ-cc-Xkt">
-                                            <rect key="frame" x="8" y="59" width="179" height="17"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="31" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hd-2M-FUl">
-                                            <rect key="frame" x="561" y="4" width="31" height="36"/>
-                                            <animations/>
-                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="30"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cell_clear.png" translatesAutoresizingMaskIntoConstraints="NO" id="b7H-8n-qcy">
-                                            <rect key="frame" x="560" y="46" width="32" height="32"/>
-                                            <animations/>
-                                        </imageView>
+                                        </stackView>
                                     </subviews>
                                     <animations/>
                                     <color key="backgroundColor" red="0.20392156859999999" green="0.59607843140000005" blue="0.85882352939999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="ACJ-cc-Xkt" firstAttribute="leading" secondItem="EKz-Op-uj8" secondAttribute="leading" id="FLt-gO-yjk"/>
-                                        <constraint firstItem="EKz-Op-uj8" firstAttribute="leading" secondItem="1gV-Xc-3Nq" secondAttribute="leading" constant="8" id="KQS-Pf-IsG"/>
-                                        <constraint firstItem="EKz-Op-uj8" firstAttribute="top" secondItem="1gV-Xc-3Nq" secondAttribute="top" constant="8" id="ReK-8K-Hln"/>
-                                        <constraint firstAttribute="trailing" secondItem="3hd-2M-FUl" secondAttribute="trailing" constant="8" id="Vqo-oG-Z5D"/>
-                                        <constraint firstItem="b7H-8n-qcy" firstAttribute="top" secondItem="3hd-2M-FUl" secondAttribute="bottom" constant="6" id="dSd-Bd-qYE"/>
-                                        <constraint firstItem="3hd-2M-FUl" firstAttribute="top" secondItem="1gV-Xc-3Nq" secondAttribute="top" constant="4" id="gcg-Fc-jMw"/>
-                                        <constraint firstItem="ACJ-cc-Xkt" firstAttribute="top" secondItem="BNj-hE-YOU" secondAttribute="bottom" id="jqP-3j-1iu"/>
-                                        <constraint firstItem="b7H-8n-qcy" firstAttribute="centerX" secondItem="3hd-2M-FUl" secondAttribute="centerX" id="wnq-8N-aqx"/>
-                                        <constraint firstItem="BNj-hE-YOU" firstAttribute="top" secondItem="EKz-Op-uj8" secondAttribute="bottom" constant="2" id="zBm-J5-UIZ"/>
-                                        <constraint firstItem="BNj-hE-YOU" firstAttribute="leading" secondItem="EKz-Op-uj8" secondAttribute="leading" id="znE-2D-2bj"/>
-                                        <constraint firstItem="3hd-2M-FUl" firstAttribute="trailing" secondItem="b7H-8n-qcy" secondAttribute="trailing" id="zzA-IU-kvy"/>
+                                        <constraint firstItem="fPT-Ey-cXK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YZx-a6-Puk" secondAttribute="trailing" constant="20" id="26Q-DC-gAS"/>
+                                        <constraint firstItem="fPT-Ey-cXK" firstAttribute="centerY" secondItem="1gV-Xc-3Nq" secondAttribute="centerY" id="M1t-yg-ULb"/>
+                                        <constraint firstItem="YZx-a6-Puk" firstAttribute="centerY" secondItem="1gV-Xc-3Nq" secondAttribute="centerY" id="jXU-Pm-wVQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="fPT-Ey-cXK" secondAttribute="trailing" constant="15" id="phG-5m-t36"/>
+                                        <constraint firstItem="YZx-a6-Puk" firstAttribute="leading" secondItem="1gV-Xc-3Nq" secondAttribute="leading" constant="15" id="y6N-y7-yUP"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="zzA-IU-kvy"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>

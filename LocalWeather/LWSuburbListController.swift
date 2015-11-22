@@ -464,7 +464,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     cell.updateTimeLabel.text = venueInfo.stringForUpdateTime()
     
     if let temperature = venueInfo.temperature {
-      cell.temperatureLabel.text = ("\(temperature)\u{00b0}C")
+      cell.temperatureLabel.text = ("\(temperature)\u{00b0}")
     } else {
       cell.temperatureLabel.text = "NA"
     }
