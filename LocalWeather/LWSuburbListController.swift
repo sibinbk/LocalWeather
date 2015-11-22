@@ -232,6 +232,10 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
       
       if let weatherCondition = dataItem["_weatherCondition"] as? String {
         newItem.weatherCondition = weatherCondition
+      } else {
+        if let weatherIcon = dataItem["_weatherConditionIcon"] as? String {
+          newItem.weatherCondition = newItem.weatherConiditionFromIcon(weatherIcon)
+        }
       }
       
       if let weatherIcon = dataItem["_weatherConditionIcon"] as? String {
