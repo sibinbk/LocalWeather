@@ -100,7 +100,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
       loadWeatherData(urlString)
     } else {
       dispatch_async(dispatch_get_main_queue()) {
-        self.showAlertWithTitle("No Network Connectivity!", message: "Please check your internet connectivity", cancelButtonTitle: "OK")
+        self.showAlertWithTitle("No network connection!", message: "Cannot refresh data. Please check your internet connectivity", cancelButtonTitle: "OK")
       }
     }
   }
