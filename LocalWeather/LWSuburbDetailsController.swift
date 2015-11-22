@@ -35,7 +35,7 @@ class LWSuburbDetailsController: UIViewController {
       }
       
       if let temperature = venue!.temperature {
-        temperatureLabel.text = ("\(temperature)\u{00b0}C")
+        temperatureLabel.text = ("\(temperature)\u{00b0}")
       } else {
         temperatureLabel.text = "NA"
       }
