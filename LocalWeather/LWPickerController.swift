@@ -98,7 +98,6 @@ class LWPickerController: UIViewController, UITableViewDataSource, UITableViewDe
   // MARK: - Table view delegate
   
   func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    print("Selected Row # \(indexPath.row)")
     if let pickerDelegate = pickerDelegate {
       pickerDelegate.didSelectPickerValueFilterKey(filterKey!, value: filteredListArray![indexPath.row])
     }

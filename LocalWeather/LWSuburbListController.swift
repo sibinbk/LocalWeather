@@ -94,7 +94,6 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   }
   
   @IBAction func reloadWeatherData(sender: UIBarButtonItem) {
-    print("Refresh button pressed")
     // Reload weather data
     
     if connectedToNetwork() {
@@ -142,7 +141,6 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     actionSheet.addAction(UIAlertAction(title: "Country", style: .Default, handler: { (action) -> Void in
       let filterKey = "country"
       if let result = self.filteredList(filterKey) {
-        print(result) // Remove this line
         self.filteredListArray = result
         self.performSegueWithIdentifier("pickerSegue", sender: filterKey)
       }
@@ -151,7 +149,6 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     actionSheet.addAction(UIAlertAction(title: "Weather Condition", style: .Default, handler: { (action) -> Void in
       let filterKey = "weatherCondition"
       if let result = self.filteredList(filterKey) {
-        print(result) // Remove this line
         self.filteredListArray = result
         self.performSegueWithIdentifier("pickerSegue", sender: filterKey)      }
     }))
