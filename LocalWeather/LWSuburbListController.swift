@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import SystemConfiguration
 
-class LWSuburbListController: UITableViewController, NSFetchedResultsControllerDelegate {
+class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
   
   private let urlString = "https://dnu5embx6omws.cloudfront.net/venues/weather.json"
   private let ReuseIdentifierCell = "SuburbCell"
@@ -23,7 +23,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
-
+    
     // Initialize Fetch Request.
     let fetchRequest = NSFetchRequest(entityName: "Venue")
     
@@ -63,17 +63,20 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     let needsConnection = flags.contains(.ConnectionRequired)
     return (isReachable && !needsConnection)
   }
-
+  
   // MARK: - View Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
-
-//    self.resultSearchController = UISearchController(searchResultsController: nil)
-//    self.resultSearchController.searchResultsUpdater = self
-//    self.resultSearchController.dimsBackgroundDuringPresentation = false
-//    self.resultSearchController.searchBar.sizeToFit()
-//    self.tableView.tableHeaderView = self.resultSearchController.searchBar
+    
+    self.resultSearchController = UISearchController(searchResultsController: nil)
+    self.resultSearchController.searchResultsUpdater = self
+    self.resultSearchController.dimsBackgroundDuringPresentation = false
+    self.resultSearchController.searchBar.sizeToFit()
+    self.tableView.tableHeaderView = self.resultSearchController.searchBar
+    
+    // Determines where to present search controller.
+    self.definesPresentationContext = true
     
     // Check connectivity before network call.
     
@@ -176,7 +179,7 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
           }
           return
         }
-
+        
         // Deleting existing Core Data entries before reloading json data.
         self.deleteSavedItems()
         
@@ -336,34 +339,34 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   
   // MARK: - Search Results Update method
   
-//  func updateSearchResultsForSearchController(searchController: UISearchController)
-//  {
-//    self.searchResults.removeAll(keepCapacity: false)
-//    
-//    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//    let context = appDelegate.managedObjectContext
-//    
-//    let fetchRequest = NSFetchRequest(entityName: "Venue")
-//    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
-//    
-//    let searchPredicate = NSPredicate(format: "venueName CONTAINS[c] %@", searchController.searchBar.text!)
-//    fetchRequest.predicate = searchPredicate
-//    
-//    do {
-//      if let results = try context.executeFetchRequest(fetchRequest) as? [Venue] {
-//        searchResults = results
-//      }
-//    } catch {
-//      fatalError("Error while fetching venue list")
-//    }
-//    
-//    tableView.reloadData()
-//  }
+  func updateSearchResultsForSearchController(searchController: UISearchController)
+  {
+    self.searchResults.removeAll(keepCapacity: false)
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = appDelegate.managedObjectContext
+    
+    let fetchRequest = NSFetchRequest(entityName: "Venue")
+    fetchRequest.sortDescriptors = [NSSortDescriptor(key: "venueName", ascending: true)]
+    
+    let searchPredicate = NSPredicate(format: "venueName CONTAINS[c] %@", searchController.searchBar.text!)
+    fetchRequest.predicate = searchPredicate
+    
+    do {
+      if let results = try context.executeFetchRequest(fetchRequest) as? [Venue] {
+        searchResults = results
+      }
+    } catch {
+      fatalError("Error while fetching venue list")
+    }
+    
+    tableView.reloadData()
+  }
   
   // MARK: - Filter method to get distinct values
   
   func filteredList(filterItem: String) -> [String]? {
-
+    
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     let context = appDelegate.managedObjectContext
     
@@ -412,18 +415,20 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
   // MARK: - Table view data source
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    if let sections = fetchedResultsController.sections {
-      return sections.count
-    }
-    return 0
+    return 1
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    if let sections = fetchedResultsController.sections {
-      let sectionInfo = sections[section]
-      return sectionInfo.numberOfObjects
+    if self.resultSearchController.active {
+      return self.searchResults.count
+    } else {
+      if let sections = fetchedResultsController.sections {
+        let sectionInfo = sections[section]
+        return sectionInfo.numberOfObjects
+      }
     }
+    
     return 0
   }
   
@@ -440,7 +445,11 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
     
     let venueInfo: Venue
     
-    venueInfo = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
+    if self.resultSearchController.active {
+      venueInfo = self.searchResults[indexPath.row]
+    } else {
+      venueInfo = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
+    }
     
     if let venueName = venueInfo.venueName {
       cell.venueLabel.text = venueName
@@ -470,14 +479,20 @@ class LWSuburbListController: UITableViewController, NSFetchedResultsControllerD
       // 'Wet Asphalt' color when weather info not available
       cell.contentView.backgroundColor = UIColor(colorCode: "34495E", alpha: 1.0)
     }
-
+    
   }
-
+  
   // MARK: - Table view data source
   
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     let venue: Venue
-    venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
+    
+    if self.resultSearchController.active {
+      venue = self.searchResults[indexPath.row]
+    } else {
+      venue = fetchedResultsController.objectAtIndexPath(indexPath) as! Venue
+    }
+    
     performSegueWithIdentifier("suburbDetailSegue", sender: venue)
     
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
