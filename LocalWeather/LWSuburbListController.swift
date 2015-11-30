@@ -19,6 +19,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   var resultSearchController: UISearchController!
   var filteredListArray = [String]()
   var filterValue = ""
+  var titleLabel: UILabel!
+  var updateTimeLabel: UILabel!
   
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -69,6 +71,29 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    // Set custom title view to show title and update time.
+    let customView = UIView(frame: CGRectMake(0, 0, 150, 44))
+    
+//    titleLabel = UILabel(frame: CGRectMake(0, 0, 150, 18))
+//    titleLabel.textColor = UIColor.whiteColor()
+//    titleLabel.font = UIFont(name: "AvenirNext-Bold", size: 16)
+//    titleLabel.backgroundColor = UIColor.clearColor()
+//    titleLabel.numberOfLines = 0
+//    titleLabel.textAlignment = NSTextAlignment.Center
+//    titleLabel.text = "Weather"
+//    customView.addSubview(titleLabel)
+    
+    updateTimeLabel = UILabel(frame: CGRectMake(0, 0, 150, 40))
+    updateTimeLabel.textColor = UIColor.whiteColor()
+    updateTimeLabel.font = UIFont(name: "AvenirNext-Regular", size: 12)
+    updateTimeLabel.backgroundColor = UIColor.clearColor()
+    updateTimeLabel.numberOfLines = 2
+    updateTimeLabel.textAlignment = NSTextAlignment.Center
+    updateTimeLabel.text = ""
+    customView.addSubview(updateTimeLabel)
+    
+    // Set Search controller
+    self.navigationItem.titleView = customView
     self.resultSearchController = UISearchController(searchResultsController: nil)
     self.resultSearchController.searchResultsUpdater = self
     self.resultSearchController.dimsBackgroundDuringPresentation = false
@@ -308,6 +333,8 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     
     dispatch_async(dispatch_get_main_queue()) {
       self.tableView.reloadData()
+      // Update data reload time.
+      self.updateTimeLabel.text = "Updated On \n \(self.updateTimeString())"
     }
   }
   
@@ -551,6 +578,15 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
         destination.venue = sender as? Venue
       }
     }
+  }
+  
+  // MARK: - Converts current date to String
+  
+  func updateTimeString() -> String {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
+    dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
+    return dateFormatter.stringFromDate(NSDate())
   }
 }
 
