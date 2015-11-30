@@ -85,7 +85,7 @@ class LWSuburbListController: UITableViewController, UISearchResultsUpdating, NS
     
     updateTimeLabel = UILabel(frame: CGRectMake(0, 0, 150, 40))
     updateTimeLabel.textColor = UIColor.whiteColor()
-    updateTimeLabel.font = UIFont(name: "AvenirNext-Regular", size: 12)
+    updateTimeLabel.font = UIFont(name: "AvenirNext-Regular", size: 14)
     updateTimeLabel.backgroundColor = UIColor.clearColor()
     updateTimeLabel.numberOfLines = 2
     updateTimeLabel.textAlignment = NSTextAlignment.Center
